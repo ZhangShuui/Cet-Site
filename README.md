@@ -27,6 +27,7 @@
     ./redis-cli.exe 
   ```
   3. 加载maven依赖
+  4. 将sql文件载入创建的soft数据库中
 - 前端：
   1. 进入cet-frontend，运行命令安装相关依赖
   ```sh
