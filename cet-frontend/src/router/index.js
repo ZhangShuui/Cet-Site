@@ -38,7 +38,11 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const store = useStore()
   if(store.auth.user != null && to.name.startsWith('welcome-')) {
-    next('/index')
+    if (store.auth.user.isStu === 1)
+      next('/index')
+    else
+      next('/teacher/index')
+    console.log(store.auth.user.isStu)
   } else if(store.auth.user == null && to.fullPath.startsWith('/index')) {
     next('/')
   } else if(to.matched.length === 0){
