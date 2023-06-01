@@ -7,4 +7,5 @@ public class AccountUser {
     int id;
     String username;
     String email;
+    int isStu;
 }

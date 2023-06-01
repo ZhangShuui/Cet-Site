@@ -21,6 +21,20 @@
 - 后端：
   1. 修改 application.yml 为本机配置
   2. 配置好本地redis数据库与mysql数据库，并启动
+  ```shell
+    #redis启动
+    ./redis-server.exe redis.windows.conf
+    ./redis-cli.exe 
+  ```
   3. 加载maven依赖
 - 前端：
-  1. 进入cet-frontend，运行命令`npm install`，安装相关依赖
+  1. 进入cet-frontend，运行命令安装相关依赖
+  ```sh
+  npm install
+  ```
+运行步骤：
+1. 在后端编译好spring boot application，然后启动项目
+2. 在前端启动vue项目
+```shell
+  npm run dev
+```

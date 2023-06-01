@@ -78,8 +78,9 @@ public class AuthorizeServiceImpl implements AuthorizeService {
     }
 
     @Override
-    public String validateAndRegister(String username, String password, String email, String code, String sessionId) {
+    public String validateAndRegister(String username, String password, String email, String code, String teacherId, String sessionId) {
         String key = "email:" + sessionId + ":" + email + ":false";
+        int isStu = 1;
         if(Boolean.TRUE.equals(template.hasKey(key))) {
             String s = template.opsForValue().get(key);
             if(s == null) return "验证码失效，请重新请求";
@@ -88,7 +89,15 @@ public class AuthorizeServiceImpl implements AuthorizeService {
                 if(account != null) return "此用户名已被注册，请更换用户名";
                 template.delete(key);
                 password = encoder.encode(password);
-                if (mapper.createAccount(username, password, email) > 0) {
+                if(teacherId != null){
+                    int t_id = mapper.isTeacherIdValid(username, teacherId);
+                    if (t_id != 0){
+                        isStu = 0;
+                    }else {
+                        return "错误的教师编号，请重新输入";
+                    }
+                }
+                if (mapper.createAccount(username, password, email, isStu) > 0) {
                     return null;
                 } else {
                     return "内部错误，请联系管理员";

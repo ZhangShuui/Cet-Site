@@ -64,7 +64,10 @@ const login = () => {
             ElMessage.success(message)
             get('/api/user/me', (message) => {
                 store.auth.user = message
-                router.push('/index')
+                if (message.isStu === 1)
+                  router.push('/index')
+                else
+                  router.push('/teacher/index')
             }, () => {
                 store.auth.user = null
             })
