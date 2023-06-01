@@ -39,6 +39,12 @@
   npm run dev
 ```
 
+⭐已存在的账号：
+**student**:
+- admin 1262426565@qq.com 123456
+**teacher**:
+- 杨飓风 zhangshuui@gmail 123456
+
 ⚠️可能遇到的Bug：
 1. 注意运行npm指令时当前terminal是否为管理员权限
 2. 注意pom包中是否同时含有`spring-boot-starter-data-jdbc`与`mysql-connector-j`,否则可能出现无法加载JDBC对象的错误（另外，修改dependency后请记得随时刷新maven依赖）
