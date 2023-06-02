@@ -42,7 +42,6 @@ router.beforeEach((to, from, next) => {
       next('/index')
     else
       next('/teacher/index')
-    console.log(store.auth.user.isStu)
   } else if(store.auth.user == null && to.fullPath.startsWith('/index')) {
     next('/')
   } else if(to.matched.length === 0){

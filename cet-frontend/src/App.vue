@@ -8,7 +8,10 @@ const store = useStore()
 if(store.auth.user == null) {
     get('/api/user/me', (message) => {
         store.auth.user = message
-        router.push('/index')
+        if (store.auth.user.isStu === 1)
+          router.push('/index')
+        else
+          router.push('/teacher/index')
     }, () => {
         store.auth.user = null
     })
