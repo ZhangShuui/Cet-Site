@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2023-06-01 15:56:16
+-- 生成日期： 2023-06-02 10:48:08
 -- 服务器版本： 10.4.22-MariaDB
 -- PHP 版本： 8.0.15
 
@@ -64,16 +64,16 @@ CREATE TABLE `soft_user` (
                              `email` varchar(20) NOT NULL,
                              `username` varchar(30) NOT NULL,
                              `password` varchar(100) NOT NULL,
-                             `is_stu` int(11) NOT NULL DEFAULT 1
+                             `isStu` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- 转存表中的数据 `soft_user`
 --
 
-INSERT INTO `soft_user` (`id`, `email`, `username`, `password`, `is_stu`) VALUES
-                                                                              (1, '1262426565@qq.com', 'admin', '$2a$10$DCrVoLjBAoLacrqgpl4vaO4kX28hPMd9woQWVW0tkfTQYrnqeOjZS', 1),
-                                                                              (2, 'zhangshuui@gmail.com', '杨飓风', '$2a$10$Ks/E4dMUXST5w6QSW9MD/ekrw.0kDISYl3anq2owKVTAP4Gb8QuLK', 0);
+INSERT INTO `soft_user` (`id`, `email`, `username`, `password`, `isStu`) VALUES
+                                                                             (1, '1262426565@qq.com', 'admin', '$2a$10$DCrVoLjBAoLacrqgpl4vaO4kX28hPMd9woQWVW0tkfTQYrnqeOjZS', 1),
+                                                                             (2, 'zhangshuui@gmail.com', '杨飓风', '$2a$10$Ks/E4dMUXST5w6QSW9MD/ekrw.0kDISYl3anq2owKVTAP4Gb8QuLK', 0);
 
 --
 -- 转储表的索引
@@ -90,16 +90,16 @@ ALTER TABLE `persistent_logins`
 --
 ALTER TABLE `soft_teacher`
     ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `name` (`name`) USING HASH,
-  ADD UNIQUE KEY `teacher_id` (`teacher_id`) USING HASH;
+    ADD UNIQUE KEY `name` (`name`) USING HASH,
+    ADD UNIQUE KEY `teacher_id` (`teacher_id`) USING HASH;
 
 --
 -- 表的索引 `soft_user`
 --
 ALTER TABLE `soft_user`
     ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `username` (`username`);
+    ADD UNIQUE KEY `email` (`email`),
+    ADD UNIQUE KEY `username` (`username`);
 
 --
 -- 在导出的表使用AUTO_INCREMENT
