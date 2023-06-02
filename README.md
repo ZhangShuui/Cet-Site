@@ -40,3 +40,7 @@
 1. 注意运行npm指令时当前terminal是否为管理员权限
 2. 注意pom包中是否同时含有`spring-boot-starter-data-jdbc`与`mysql-connector-j`,否则可能出现无法加载JDBC对象的错误（另外，修改dependency后请记得随时刷新maven依赖）
 3. ...
+
+:link: 参考项目：
+
+- [study-project](https://github.com/Ketuer/study-project) by [ketuer](https://github.com/Ketuer)
