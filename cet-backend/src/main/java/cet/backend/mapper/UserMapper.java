@@ -12,10 +12,10 @@ public interface UserMapper {
     @Select("select * from soft_user where username = #{text} or email = #{text}")
     Account findAccountByNameOrEmail(String text);
 
-    @Select("select * from soft_user where username = #{text} or email = #{text}")
+    @Select("select isStu, username, email, id from soft_user where username = #{text} or email = #{text}")
     AccountUser findAccountUserByNameOrEmail(String text);
 
-    @Insert("insert into soft_user (email, username, password, is_stu) values (#{email}, #{username}, #{password}, #{isStu})")
+    @Insert("insert into soft_user (email, username, password, isStu) values (#{email}, #{username}, #{password}, #{isStu})")
     int createAccount(String username, String password, String email, int isStu);
 
     @Update("update soft_user set password = #{password} where email = #{email}")

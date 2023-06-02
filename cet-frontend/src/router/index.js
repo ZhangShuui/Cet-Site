@@ -47,6 +47,7 @@ router.beforeEach((to, from, next) => {
   } else if(to.matched.length === 0){
     next('/index')
   } else {
+    console.log("哈哈哈")
     next()
   }
 })
