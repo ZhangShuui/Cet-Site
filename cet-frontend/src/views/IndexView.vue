@@ -1,6 +1,6 @@
 <template>
   <div class="common-layout">
-    <el-container style="margin-left: 100px; margin-right: 100px; margin-top: 50px">
+    <el-container style="margin-left: 100px; margin-right: 100px; margin-top: 50px; min-height: 95vh">
       <el-header>
         <div >
           <el-menu

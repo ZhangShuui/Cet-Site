@@ -30,7 +30,14 @@ const router = createRouter({
     }, {
       path: '/teacher/index',
       name: 'teacher-index',
-      component: () => import('@/views/TeacherIndexView.vue')
+      component: () => import('@/views/TeacherIndexView.vue'),
+      // children: [
+      //   {
+      //     path: 'sidebar',
+      //     name: 'index-sidebar',
+      //     component: () => import('@/components/teacherIndex/sideBar.vue')
+      //   }
+      // ]
     }
   ]
 })
@@ -47,7 +54,6 @@ router.beforeEach((to, from, next) => {
   } else if(to.matched.length === 0){
     next('/index')
   } else {
-    console.log("哈哈哈")
     next()
   }
 })
