@@ -12,31 +12,32 @@
           >
             <el-image src="src/figs/cetlogo.png" style="width: 58px; height: 58px"/>
             <el-text style="margin-left: 10px; font-size: 18px">
-              大学生四、六级考试
+              大学生六级考试
             </el-text>
             <div class="flex-grow" />
             <el-menu-item index="1">首页</el-menu-item>
             <el-menu-item index="2">联系我们</el-menu-item>
-            <el-sub-menu index="3">
+            <el-sub-menu index="3" style="width:fit-content">
               <template #title>{{ store.auth.user.username }}</template>
-              <el-menu-item index="3-1" @click="logout()">退出登录</el-menu-item>
-              <el-menu-item index="3-2">item two</el-menu-item>
-              <el-menu-item index="3-3">item three</el-menu-item>
-              <el-sub-menu index="3-4">
-                <template #title>item four</template>
-                <el-menu-item index="3-4-1">item one</el-menu-item>
-                <el-menu-item index="3-4-2">item two</el-menu-item>
-                <el-menu-item index="3-4-3">item three</el-menu-item>
-              </el-sub-menu>
+              <el-menu-item index="3-1" @click="logout()" >
+                <span>退出登录</span>
+              </el-menu-item>
+              <el-menu-item index="3-2">个人信息</el-menu-item>
             </el-sub-menu>
           </el-menu>
 
         </div>
       </el-header>
       <el-main>
-        <el-carousel :interval="4000" type="card" height="200px">
-          <el-carousel-item v-for="item in 6" :key="item">
-            <h3 text="2xl" justify="center">{{ item }}</h3>
+        <el-carousel :interval="4000" type="card" height="300px">
+          <el-carousel-item style="width: auto">
+            <img src="../figs/testpost.png"/>
+          </el-carousel-item>
+          <el-carousel-item style="width: auto">
+            <img src="../figs/testknow.png"/>
+          </el-carousel-item>
+          <el-carousel-item style="width: auto">
+            <img src="../figs/teamwork.png">
           </el-carousel-item>
         </el-carousel>
         <el-row>
@@ -74,12 +75,12 @@
                 <template #header>
                   <div class="card-header">
                     <el-icon><Service/></el-icon>
-                    <el-text style="margin-right: auto">口试报名</el-text>
+                    <el-text style="margin-right: auto">线上考试</el-text>
                     <el-button class="button" text>详细信息</el-button>
                   </div>
                 </template>
                 <el-text>
-                  CET口试每年开考两次，分别于5月和11月举行，具体考试时间我中心将会在每年年初…
+                  CET线上考试每年开考两次，分别于5月和11月举行，具体考试时间我中心将会在每年年初…
                 </el-text>
               </el-card>
             </el-col>

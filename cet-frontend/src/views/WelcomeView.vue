@@ -2,7 +2,7 @@
     <div style="width: 100vw;height: 100vh;overflow: hidden;display: flex">
         <div style="flex: 1">
             <el-image style="width: 100%;height: 100%" fit="cover"
-                      src="https://img1.baidu.com/it/u=4097856652,4033702227&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800"/>
+                      src="/src/figs/background.jpg"/>
         </div>
         <div class="welcome-title">
             <div style="font-size: 30px;font-weight: bold">欢迎来到CET报名系统网站</div>

@@ -20,9 +20,14 @@
               </el-breadcrumb-item>
             </el-breadcrumb>
             <el-menu style="margin-left: auto">
-              <el-menu-item style="background-color: #d3dce6; height: 50px">
-                {{ store.auth.user.username }}老师
-              </el-menu-item>
+              <el-sub-menu style="background-color: #d3dce6; height: 50px">
+                <template #title>
+                  {{ store.auth.user.username }}老师
+                </template>
+                <el-menu-item @click="logout()" style="background-color: #d3dce6">
+                  退出登录
+                </el-menu-item>
+              </el-sub-menu>
             </el-menu>
           </el-container>
         </el-container>
@@ -36,9 +41,6 @@
           <el-main>
             <div>
               欢迎进入到学习平台
-            </div>
-            <div>
-              <el-button @click="logout()" type="danger" plain>退出登录</el-button>
             </div>
           </el-main>
           <el-footer>

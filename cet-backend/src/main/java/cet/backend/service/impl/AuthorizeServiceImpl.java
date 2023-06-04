@@ -89,7 +89,7 @@ public class AuthorizeServiceImpl implements AuthorizeService {
                 if(account != null) return "此用户名已被注册，请更换用户名";
                 template.delete(key);
                 password = encoder.encode(password);
-                if(teacherId != null){
+                if(teacherId != null && teacherId.length() != 0){
                     int t_id = mapper.isTeacherIdValid(username, teacherId);
                     if (t_id != 0){
                         isStu = 0;
