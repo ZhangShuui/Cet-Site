@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2023-06-02 10:48:08
+-- 生成日期： 2023-06-29 10:07:59
 -- 服务器版本： 10.4.22-MariaDB
 -- PHP 版本： 8.0.15
 
@@ -37,6 +37,21 @@ CREATE TABLE `persistent_logins` (
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `soft_apply`
+--
+
+CREATE TABLE `soft_apply` (
+                              `exam_id` int(11) NOT NULL,
+                              `user_id` int(11) NOT NULL,
+                              `payment_status` varchar(10) DEFAULT NULL,
+                              `application_time` varchar(20) NOT NULL,
+                              `score` int(11) DEFAULT NULL,
+                              `test_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `soft_teacher`
 --
 
@@ -51,7 +66,8 @@ CREATE TABLE `soft_teacher` (
 --
 
 INSERT INTO `soft_teacher` (`id`, `name`, `teacher_id`) VALUES
-    (1, '杨飓风', 'ABCDEF');
+                                                            (1, '杨飓风', 'ABCDEF'),
+                                                            (2, '马宝国', 'BCDEFG');
 
 -- --------------------------------------------------------
 
@@ -72,8 +88,10 @@ CREATE TABLE `soft_user` (
 --
 
 INSERT INTO `soft_user` (`id`, `email`, `username`, `password`, `isStu`) VALUES
-                                                                             (1, '1262426565@qq.com', 'admin', '$2a$10$DCrVoLjBAoLacrqgpl4vaO4kX28hPMd9woQWVW0tkfTQYrnqeOjZS', 1),
-                                                                             (2, 'zhangshuui@gmail.com', '杨飓风', '$2a$10$Ks/E4dMUXST5w6QSW9MD/ekrw.0kDISYl3anq2owKVTAP4Gb8QuLK', 0);
+                                                                             (1, '1262426565@qq.com', 'admin', '$2a$10$7F6Xeb/NFJ.o4y8qYAYMTu0/fRTVRKKt1jRcP9CwIpSEsXyjKN75u', 1),
+                                                                             (2, 'zhangshuui@gmail.com', '杨飓风', '$2a$10$Ks/E4dMUXST5w6QSW9MD/ekrw.0kDISYl3anq2owKVTAP4Gb8QuLK', 0),
+                                                                             (3, 'moqiji1011@163.com', 'mqj', '$2a$10$K/8CuuxiwTREQzqbXsnvH.1nZQNzJj2yGhkw9Zju3xggMPUXT4uCu', 1),
+                                                                             (4, 'moqiji@outlook.com', '马宝国', '$2a$10$29JfqpeA7W1HcWtGlsJClu9OmUCgKeDjQaEbhWy0WQJ7ZPWdKZqny', 0);
 
 --
 -- 转储表的索引
@@ -84,6 +102,12 @@ INSERT INTO `soft_user` (`id`, `email`, `username`, `password`, `isStu`) VALUES
 --
 ALTER TABLE `persistent_logins`
     ADD PRIMARY KEY (`series`);
+
+--
+-- 表的索引 `soft_apply`
+--
+ALTER TABLE `soft_apply`
+    ADD PRIMARY KEY (`exam_id`,`user_id`);
 
 --
 -- 表的索引 `soft_teacher`
@@ -109,13 +133,13 @@ ALTER TABLE `soft_user`
 -- 使用表AUTO_INCREMENT `soft_teacher`
 --
 ALTER TABLE `soft_teacher`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用表AUTO_INCREMENT `soft_user`
 --
 ALTER TABLE `soft_user`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
