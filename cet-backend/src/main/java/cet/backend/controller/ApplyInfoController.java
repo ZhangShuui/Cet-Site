@@ -4,10 +4,7 @@ import cet.backend.entity.RestBean;
 import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.service.impl.ApplyHandleServiceImpl;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +21,8 @@ public class ApplyInfoController {
     ApplyHandleServiceImpl service;
 
     @PostMapping("/payment-submit")
-    public RestBean<String> paymentSubmit(@SessionAttribute("exam_id") int exam_id,
-                                          @SessionAttribute("user_id") int user_id){
+    public RestBean<String> paymentSubmit(@RequestParam("exam_id") int exam_id,
+                                          @RequestParam("user_id") int user_id){
         if (service.payForApply(exam_id, user_id)){
             return RestBean.success("支付成功");
         }else
@@ -33,8 +30,8 @@ public class ApplyInfoController {
     }
 
     @PostMapping("/apply-for-test")
-    public RestBean<String> applyFotTest(@SessionAttribute("exam_id") int exam_id,
-                                         @SessionAttribute("user_id") int user_id){
+    public RestBean<String> applyFotTest(@RequestParam("exam_id") int exam_id,
+                                         @RequestParam("user_id") int user_id){
         if (service.applyTestByUser(exam_id, user_id)){
             return RestBean.success("申请考试成功");
         }else {
@@ -43,10 +40,40 @@ public class ApplyInfoController {
     }
 
     @PostMapping("/find-apply-info")
-    public RestBean<List<ApplyInfo>> findApplyInfo(@SessionAttribute("exam_id") int exam_id,
-                                                   @SessionAttribute("user_id") int user_id){
+    public RestBean<List<ApplyInfo>> findApplyInfo(@RequestParam("exam_id") int exam_id,
+                                                   @RequestParam("user_id") int user_id){
 
-        return null;
+        if (exam_id == -1 && user_id == -1){
+            return RestBean.success(service.showAllApplyInfo());
+        }else if(user_id == -1){
+            return RestBean.success(service.findByExamId(exam_id));
+        }else if(exam_id == -1){
+            return RestBean.success(service.findByUserId(user_id));
+        }else {
+            return RestBean.success(service.findByTwoId(exam_id, user_id));
+        }
+    }
+    
+    @PostMapping("/delete-apply-info")
+    public RestBean<String> deleteApplyInfo(@RequestParam("exam_id") int exam_id,
+                                            @RequestParam("user_id") int user_id){
+        if (service.deleteApplyInfo(exam_id, user_id))
+            return RestBean.success("取消考试成功");
+        else
+            return RestBean.failure(400, "取消考试失败");
     }
 
+    @PostMapping()
+    public RestBean<String> updateApplyInfo(@RequestParam("exam_id") int exam_id,
+                                            @RequestParam("user_id") int user_id,
+                                            @RequestParam("payment_status") String payment_status,
+                                            @RequestParam("score") int score,
+                                            @RequestParam("test_id") int test_id){
+        if (service.updateTestOrPaymentStatus(exam_id, user_id, payment_status, test_id)
+                &&service.updateScore(exam_id, user_id, score))
+            return RestBean.success("修改考试信息成功");
+        else
+            return RestBean.failure(400, "修改考试信息失败");
+
+    }
 }

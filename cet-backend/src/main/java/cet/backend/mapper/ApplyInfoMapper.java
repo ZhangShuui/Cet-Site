@@ -36,4 +36,13 @@ public interface ApplyInfoMapper {
 
     @Select("select * from soft_apply where exam_id=#{exam_id} and user_id=#{user_id}")
     ApplyInfo findApplyInfoByMainKey(int exam_id, int user_id);
+
+    @Select("select * from soft_apply where user_id=#{user_id}")
+    List<ApplyInfo> findByUserId(int user_id);
+
+    @Select("select * from soft_apply where exam_id=#{exam_id}")
+    List<ApplyInfo> findByExamId(int exam_id);
+
+    @Select("select * from soft_apply where exam_id=#{exam_id} and user_id=#{user_id}")
+    List<ApplyInfo> findByExamAndUserId(int exam_id, int user_id);
 }
