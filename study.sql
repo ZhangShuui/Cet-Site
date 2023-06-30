@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： 127.0.0.1
--- 生成日期： 2023-06-29 10:07:59
+-- 生成日期： 2023-06-30 09:06:47
 -- 服务器版本： 10.4.22-MariaDB
 -- PHP 版本： 8.0.15
 
@@ -57,8 +57,8 @@ CREATE TABLE `soft_apply` (
 
 CREATE TABLE `soft_teacher` (
                                 `id` int(11) NOT NULL,
-                                `name` text NOT NULL,
-                                `teacher_id` text NOT NULL
+                                `name` varchar(20) NOT NULL,
+                                `teacher_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -114,8 +114,8 @@ ALTER TABLE `soft_apply`
 --
 ALTER TABLE `soft_teacher`
     ADD PRIMARY KEY (`id`),
-    ADD UNIQUE KEY `name` (`name`) USING HASH,
-    ADD UNIQUE KEY `teacher_id` (`teacher_id`) USING HASH;
+    ADD UNIQUE KEY `name` (`name`),
+    ADD UNIQUE KEY `teacher_id` (`teacher_id`);
 
 --
 -- 表的索引 `soft_user`
@@ -133,7 +133,7 @@ ALTER TABLE `soft_user`
 -- 使用表AUTO_INCREMENT `soft_teacher`
 --
 ALTER TABLE `soft_teacher`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用表AUTO_INCREMENT `soft_user`
