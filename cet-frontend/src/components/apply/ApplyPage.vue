@@ -25,9 +25,9 @@
     <el-table-column fixed prop="date" label="考试编号" width="250" />
     <el-table-column prop="date" label="考试日期" width="250" />
     <el-table-column prop="name" label="报考截止" width="250" />
-    <el-table-column fixed="right" label="操作" width="250">
-      <template #default>
-        <el-button link type="primary" >退考</el-button>
+    <el-table-column fixed="right" label="操作">
+      <template v-slot="scope">
+        <el-button link type="primary" @click="clickApply(scope.$index)">退考</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -36,6 +36,10 @@
 <script setup>
 
 import {Bell, StarFilled} from "@element-plus/icons-vue";
+import {useStore} from "@/stores";
+import {reactive} from "vue";
+import {ElMessage} from "element-plus";
+import {post} from "@/net";
 
 const tableData = [
   {
@@ -75,6 +79,55 @@ const tableData = [
     tag: 'Office',
   },
 ]
+const applyForm = reactive({
+  user_id: useStore.$id,
+  exam_id: -1,
+})
+
+const quitForm = reactive({
+  user_id: useStore.$id,
+  exam_id: -1,
+})
+
+const clickApply = (scope) => {
+  console.info(tableData[scope].date)
+}
+
+const applyForTest = () => {
+  if (applyForm.exam_id === -1){
+    ElMessage.warning("请选择考试进行报考")
+  } else {
+    post('/api/apply/apply-for-test', {
+      user_id: applyForm.user_id,
+      exam_id: applyForm.exam_id
+    }, (message) => {
+      if (message.success){
+        ElMessage.success(message)
+      }else {
+        ElMessage.warning("报考失败，请选择其他考试报考")
+      }
+    })
+  }
+}
+
+const quitTest = () => {
+  if (applyForm.exam_id === -1){
+    ElMessage.warning("请选择考试进行退考")
+  }else {
+    post('/api/apply/delete-apply-info', {
+      user_id: quitForm.user_id,
+      exam_id: quitForm.exam_id
+    }, (message) => {
+      if (message.success){
+        ElMessage.success(message)
+      }else {
+        ElMessage.warning("退考失败，请选择其他考试退考")
+      }
+    })
+  }
+}
+
+
 </script>
 
 
