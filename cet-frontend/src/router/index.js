@@ -26,7 +26,20 @@ const router = createRouter({
     }, {
       path: '/index',
       name: 'index',
-      component: () => import('@/views/IndexView.vue')
+      component: () => import('@/views/IndexView.vue'),
+      children: [
+        {
+          path: '',
+          name: 'stu-index',
+          component: () => import('@/components/index/firstTab.vue')
+
+        },
+        {
+          path: 'apply',
+          name: 'stu-apply',
+          component: () => import('@/components/apply/ApplyPage.vue')
+        }
+      ]
     }, {
       path: '/teacher/index',
       name: 'teacher-index',

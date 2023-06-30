@@ -16,4 +16,13 @@ public interface ApplyHandleService {
 
     boolean payForApply(int exam_id, int user_id);
 
+    List<ApplyInfo> findByExamId(int exam_id);
+
+    List<ApplyInfo> findByUserId(int user_id);
+
+    List<ApplyInfo> findByTwoId(int exam_id, int user_id);
+
+    boolean updateTestOrPaymentStatus(int exam_id, int user_id, String payment_status, int test_id);
+
+    boolean updateScore(int exam_id, int user_id, int score);
 }

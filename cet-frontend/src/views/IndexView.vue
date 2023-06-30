@@ -4,7 +4,6 @@
       <el-header>
         <div >
           <el-menu
-              :default-active="activeIndex"
               class="el-menu-demo"
               mode="horizontal"
               :ellipsis="false"
@@ -29,84 +28,8 @@
         </div>
       </el-header>
       <el-main>
-        <el-carousel :interval="4000" type="card" height="300px">
-          <el-carousel-item style="width: auto">
-            <img src="../figs/testpost.png"/>
-          </el-carousel-item>
-          <el-carousel-item style="width: auto">
-            <img src="../figs/testknow.png"/>
-          </el-carousel-item>
-          <el-carousel-item style="width: auto">
-            <img src="../figs/teamwork.png">
-          </el-carousel-item>
-        </el-carousel>
-        <el-row>
-          <el-space wrap>
-            <el-col span="5">
-              <el-card class="box-card">
-                <template #header>
-                  <div class="card-header">
-                    <el-icon><Bell/></el-icon>
-                    <el-text style="margin-right: auto">项目简介</el-text>
-                    <el-button class="button" text>详细信息</el-button>
-                  </div>
-                </template>
-                <el-text>
-                  全国大学英语四、六级考试(CET)系教育部主办、教育部教育考试院（原教育部考试中…
-                </el-text>
-              </el-card>
-            </el-col>
-            <el-col span="5">
-              <el-card class="box-card">
-                <template #header>
-                  <div class="card-header">
-                    <el-icon><EditPen /></el-icon>
-                    <el-text style="margin-right: auto">笔试报名</el-text>
-                    <el-button class="button" text>详细信息</el-button>
-                  </div>
-                </template>
-                <el-text>
-                  CET笔试每年开考两次，分别于6月和12月举行，具体考试时间我中心将会在每年年初…
-                </el-text>
-              </el-card>
-            </el-col>
-            <el-col span="5">
-              <el-card class="box-card">
-                <template #header>
-                  <div class="card-header">
-                    <el-icon><Service/></el-icon>
-                    <el-text style="margin-right: auto">线上考试</el-text>
-                    <el-button class="button" text>详细信息</el-button>
-                  </div>
-                </template>
-                <el-text>
-                  CET线上考试每年开考两次，分别于5月和11月举行，具体考试时间我中心将会在每年年初…
-                </el-text>
-              </el-card>
-            </el-col>
-            <el-col span="5">
-              <el-card class="box-card">
-                <template #header>
-                  <div class="card-header">
-                    <el-icon><Bell/></el-icon>
-                    <el-text style="margin-right: auto">考生服务</el-text>
-                  </div>
-                </template>
-                <template #default>
-                  <el-row>
-                    <el-col>
-                      <el-button class="button" text>详细信息</el-button>
-                    </el-col>
-                    <el-col>
-                      <el-button class="button" text>详细信息</el-button>
-                    </el-col>
-                  </el-row>
-                </template>
-              </el-card>
-            </el-col>
-          </el-space>
-        </el-row>
-
+        <router-view>
+        </router-view>
       </el-main>
       <el-footer >
         <el-affix position="bottom" offset="10px">
