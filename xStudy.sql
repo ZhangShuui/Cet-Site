@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: soft
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -100,6 +100,31 @@ CREATE TABLE `soft_apply` (
 LOCK TABLES `soft_apply` WRITE;
 /*!40000 ALTER TABLE `soft_apply` DISABLE KEYS */;
 /*!40000 ALTER TABLE `soft_apply` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `soft_examinfo`
+--
+
+DROP TABLE IF EXISTS `soft_examinfo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `soft_examinfo` (
+  `exam_id` int NOT NULL COMMENT '考试编号',
+  `start_time` timestamp NOT NULL COMMENT '考试开始时间',
+  `test_id` int NOT NULL COMMENT '试卷编号',
+  PRIMARY KEY (`exam_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COMMENT='考试信息';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `soft_examinfo`
+--
+
+LOCK TABLES `soft_examinfo` WRITE;
+/*!40000 ALTER TABLE `soft_examinfo` DISABLE KEYS */;
+INSERT INTO `soft_examinfo` VALUES (1,'2023-06-30 08:51:59',1);
+/*!40000 ALTER TABLE `soft_examinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -208,4 +233,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-30 22:40:37
+-- Dump completed on 2023-06-30 22:54:16
