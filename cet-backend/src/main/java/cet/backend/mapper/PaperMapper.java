@@ -1,8 +1,10 @@
 package cet.backend.mapper;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 
+@Mapper
 public interface PaperMapper {
     @Insert("insert into soft_paper (test_id, choiceQ1, choiceW1, choiceQ2, choiceW2,choiceQ3, choiceW3,choiceQ4, choiceW4,choiceQ5, choiceW5,readingQ1,readingQ2,choiceQ6, choiceW6,choiceQ7, choiceW7,choiceQ8, choiceW8,choiceQ9, choiceW9,choiceQ10, choiceW10, translationQ,writingQ) " +
             "values (#{test_id}, #{choiceQ1}, #{choiceW1}, #{choiceQ2}, #{choiceW2}, #{choiceQ3}, #{choiceW3},#{choiceQ4}, #{choiceW4},#{choiceQ5}, #{choiceW5},#{readingQ1},#{readingQ2},#{choiceQ6}, #{choiceW6},#{choiceQ7}, #{choiceW7},#{choiceQ8}, #{choiceW8},#{choiceQ9}, #{choiceW9},#{choiceQ10}, #{choiceW10}, #{translationQ},#{writingQ})")
