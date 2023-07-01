@@ -32,7 +32,7 @@ const VerifyMe = () => {
       post('/api/examinee/check-eligibility', {
         user_id: form.id,
         exam_id: form.exam_id,
-      }, () => {
+      }, (message) => {
         ElMessage.success("检测到您具备考试资格,进入考试")
         //在这里跳转
         router.push('/index/takeexam')
