@@ -19,6 +19,22 @@ public class PaperController {
     @Resource
     PaperHandleServiceImpl paperHandleServiceimpl;
 
+    public int preview_id=-1;
+
+    @PostMapping("/set-preview-id")
+    public RestBean<Boolean> setPreviewId(@RequestParam("test_id") int test_id){
+        preview_id = test_id;
+        if(preview_id>0) {
+            return RestBean.success(true);
+        }else {
+            return RestBean.failure(400,false);
+        }
+    }
+
+    @GetMapping("/get-preview-id")
+    public RestBean<Integer> getPreviewId(){
+        return RestBean.success(preview_id);
+    }
 
     @PostMapping("/create-choice")
     public RestBean<Boolean> CreateChoice( @RequestParam("Topic") String Topic,

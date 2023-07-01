@@ -61,7 +61,11 @@ const clickPreview = (scope) => {
   if (paperInfo.test_id === -1){
     ElMessage.warning("请选择试题")
   } else {
-
+    post('/api/paper/set-preview-id',{
+      test_id: paperInfo.test_id
+    },()=>{
+      // router
+    })
   }
 
 }
