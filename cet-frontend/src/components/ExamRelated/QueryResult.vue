@@ -4,27 +4,15 @@ import {reactive} from "vue";
 import {useStore} from "@/stores";
 import {post} from "@/net";
 import router from "@/router";
-import { ref, provide } from 'vue';
 
 
 const store = useStore()
-
-const examResult = reactive({
-  list: []
-})
-
-const sharedList = ref(examResult)
-provide('sharedList', sharedList)
-
 
 const query = () => {
   post("/api/examinee/query-results", {
     user_id:store.auth.user.id
   }, (message) => {
     ElMessage.success("查询成功")
-    examResult.list = []
-    examResult.list.push(...message)
-    console.log(examResult.list)
     router.push('/index/showresult')
   }, () => {
     ElMessage.error("查询失败")

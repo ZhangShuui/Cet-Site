@@ -3,6 +3,7 @@ package cet.backend.service;
 import cet.backend.entity.ExamRelated.AnswerInfo;
 import cet.backend.entity.ExamRelated.ExamInfo;
 import cet.backend.entity.ExamRelated.PaperInfo;
+import cet.backend.entity.ExamRelated.ResultInfo;
 import cet.backend.entity.apply.ApplyInfo;
 
 import java.util.List;
@@ -25,5 +26,5 @@ public interface ExamineeHandlerService {
                       String writingW);
     int QueryOneExamResult(int user_id, int exam_id);
 
-    List<ApplyInfo> QueryExamsResults(int user_id);
+    List<ResultInfo> QueryExamsResults(int user_id);
 }

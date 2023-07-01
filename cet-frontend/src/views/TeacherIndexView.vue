@@ -77,12 +77,7 @@ const logout = () => {
     router.push('/')
   })
 }
-const item = {
-  date: '2016-05-02',
-  name: 'Tom',
-  address: 'No. 189, Grove St, Los Angeles',
-}
-const tableData = ref(Array.from({length: 20}).fill(item))
+
 </script>
 
 <style scoped>
