@@ -8,6 +8,7 @@
               style="width: 200%; margin-top: 10px" >
       <el-table-column fixed prop="exam_id" label="考试编号"  />
       <el-table-column prop="user_id" label="考生编号" />
+      <el-table-column prop="grading_status" label="是否完成阅卷" />
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
           <el-button link type="primary" @click="clickGrading(scope.$index)">开始阅卷</el-button>
@@ -36,6 +37,7 @@ const answerForm = reactive({
 const answerInfo = reactive({
   exam_id: -1,
   user_id: -1,
+  grading_status: "",
 })
 
 const refreshData = () => {
@@ -57,12 +59,14 @@ onMounted(() => {
 const clickGrading = (scope) => {
   answerInfo.exam_id = answerForm.list[scope].exam_id;
   answerInfo.user_id = answerForm.list[scope].user_id;
+  answerInfo.grading_status = answerForm.list[scope].grading_status;
   if (answerInfo.exam_id === -1 || answerInfo.user_id === -1){
     ElMessage.warning("请选择答卷")
   } else {
     post('/api/examinee/set-answer-id',{
       exam_id: answerInfo.exam_id,
-      user_id: answerInfo.user_id
+      user_id: answerInfo.user_id,
+      grading_status: answerInfo.grading_status
     },()=>{
       post('api/examinee/auto-grading',{
         exam_id: answerInfo.exam_id,

@@ -21,8 +21,8 @@ public interface ExamineeMapper {
     @Select("select * from soft_examinfo")
     List<ExamInfo> GetAllExams();
 
-    @Insert("insert into soft_answer (exam_id, user_id, stu_choiceW1, stu_choiceW2, stu_choiceW3, stu_choiceW4, stu_choiceW5, stu_choiceW6, stu_choiceW7, stu_choiceW8, stu_choiceW9, stu_choiceW10, translationW, writingW) " +
-            "values (#{exam_id}, #{user_id}, #{stu_choiceW1}, #{stu_choiceW2}, #{stu_choiceW3}, #{stu_choiceW4}, #{stu_choiceW5}, #{stu_choiceW6}, #{stu_choiceW7}, #{stu_choiceW8}, #{stu_choiceW9}, #{stu_choiceW10}, #{translationW}, #{writingW})")
+    @Insert("insert into soft_answer (exam_id, user_id, stu_choiceW1, stu_choiceW2, stu_choiceW3, stu_choiceW4, stu_choiceW5, stu_choiceW6, stu_choiceW7, stu_choiceW8, stu_choiceW9, stu_choiceW10, translationW, writingW, grading_status) " +
+            "values (#{exam_id}, #{user_id}, #{stu_choiceW1}, #{stu_choiceW2}, #{stu_choiceW3}, #{stu_choiceW4}, #{stu_choiceW5}, #{stu_choiceW6}, #{stu_choiceW7}, #{stu_choiceW8}, #{stu_choiceW9}, #{stu_choiceW10}, #{translationW}, #{writingW},'未完成')")
     int SubmitAnswers(int exam_id, int user_id, String stu_choiceW1,
                       String stu_choiceW2, String stu_choiceW3,
                       String stu_choiceW4, String stu_choiceW5,

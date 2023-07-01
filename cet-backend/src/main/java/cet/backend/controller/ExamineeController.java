@@ -174,12 +174,12 @@ public class ExamineeController {
     public int grade_exam_id=-1;
     public int grade_user_id=-1;
 
-    public Boolean current_grading_status;
+    public String current_grading_status;
 
     @PostMapping("/set-answer-id")
     public RestBean<Boolean> setAnswerId(@RequestParam("exam_id") int exam_id,
                                          @RequestParam("user_id") int user_id,
-                                         @RequestParam("grading_status") Boolean grading_status){
+                                         @RequestParam("grading_status") String grading_status){
         grade_exam_id = exam_id;
         grade_user_id = user_id;
         current_grading_status = grading_status;
