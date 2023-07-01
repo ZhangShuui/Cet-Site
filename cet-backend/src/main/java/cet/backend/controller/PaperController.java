@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import cet.backend.service.impl.PaperHandleServicelmpl;
+import cet.backend.service.impl.PaperHandleServiceImpl;
 
 
 @RestController
 @RequestMapping("/api/paper")
 public class PaperController {
     @Resource
-    PaperHandleServicelmpl paperHandleServicelmpl;
+    PaperHandleServiceImpl paperHandleServicelmpl;
 
 
 
