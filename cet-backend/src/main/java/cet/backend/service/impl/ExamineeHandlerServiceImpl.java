@@ -96,4 +96,20 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
     public AnswerInfo getCurrentAnswer(int exam_id,int user_id){
         return mapper.getAnswerInfo(exam_id,user_id);
     }
+
+    @Override
+    public int getTestId(int exam_id, int user_id) {
+        return mapper.getTestId(exam_id,user_id);
+    }
+
+    @Override
+    public ChoiceAnswers getChoiceAnswers(int exam_id, int user_id) {
+        int test_id = mapper.getTestId(exam_id,user_id);
+        return mapper.getChoiceAnswers(test_id);
+    }
+
+    @Override
+    public int updateScore(int score, int exam_id, int user_id) {
+        return mapper.updateScore(score,exam_id,user_id);
+    }
 }

@@ -18,6 +18,7 @@ public class AnswerInfo {
     String stu_choiceW10;
     String translationW;
     String writingW;
+
     public AnswerInfo(int exam_id, int user_id, String stu_choiceW1,
                       String stu_choiceW2, String stu_choiceW3,
                       String stu_choiceW4, String stu_choiceW5,
