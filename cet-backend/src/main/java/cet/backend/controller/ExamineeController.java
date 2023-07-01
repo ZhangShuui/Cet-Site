@@ -133,7 +133,7 @@ public class ExamineeController {
                                          @RequestParam("user_id") int user_id ){
         current_answer = examineeHandlerService.getCurrentAnswer(exam_id,user_id);
 
-        return null;
+        return RestBean.success(true);;
     }
 
     public int grade_exam_id=-1;
