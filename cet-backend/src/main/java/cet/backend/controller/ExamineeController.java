@@ -35,7 +35,6 @@ public class ExamineeController {
         }else {
             return RestBean.failure(400, null);
         }
-
     }
 
     @PostMapping("/get-timeout")

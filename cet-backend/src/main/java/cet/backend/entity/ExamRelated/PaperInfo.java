@@ -15,6 +15,8 @@ public class PaperInfo {
     String choiceW4;
     String choiceQ5;
     String choiceW5;
+    String readingQ1;
+    String readingQ2;
     String choiceQ6;
     String choiceW6;
     String choiceQ7;
