@@ -28,4 +28,8 @@ public interface ExamineeHandlerService {
     List<AnswerInfoForGet> getAllAnswerInfo();
 
     AnswerInfo getCurrentAnswer(int exam_id,int user_id);
+
+    int getTestId(int exam_id,int user_id);
+
+    ChoiceAnswers getChoiceAnswers(int exam_id, int user_id);
 }

@@ -128,10 +128,11 @@ public class ExamineeController {
 
     public AnswerInfo current_answer;
 
-    @PostMapping("auto-grading")
+    @PostMapping("/auto-grading")
     public RestBean<Boolean> autoGrading(@RequestParam("exam_id") int exam_id,
                                          @RequestParam("user_id") int user_id ){
         current_answer = examineeHandlerService.getCurrentAnswer(exam_id,user_id);
+        ChoiceAnswers choiceAnswers = examineeHandlerService.getChoiceAnswers(exam_id,user_id);
 
         return RestBean.success(true);
     }
@@ -139,11 +140,15 @@ public class ExamineeController {
     public int grade_exam_id=-1;
     public int grade_user_id=-1;
 
+    public Boolean current_grading_status;
+
     @PostMapping("/set-answer-id")
     public RestBean<Boolean> setAnswerId(@RequestParam("exam_id") int exam_id,
-                                         @RequestParam("user_id") int user_id){
+                                         @RequestParam("user_id") int user_id,
+                                         @RequestParam("grading_status") Boolean grading_status){
         grade_exam_id = exam_id;
         grade_user_id = user_id;
+        current_grading_status = grading_status;
         if(grade_user_id>0 && grade_exam_id>0) {
             return RestBean.success(true);
         }else {
@@ -151,9 +156,10 @@ public class ExamineeController {
         }
     }
 
+
     @GetMapping("/get-answer-id")
     public RestBean<AnswerInfoForGet> getAnswerId(){
-        AnswerInfoForGet answerId = new AnswerInfoForGet(grade_exam_id,grade_user_id);
+        AnswerInfoForGet answerId = new AnswerInfoForGet(grade_exam_id,grade_user_id,current_grading_status);
         return RestBean.success(answerId);
     }
 

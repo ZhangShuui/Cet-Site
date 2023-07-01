@@ -34,9 +34,15 @@ public interface ExamineeMapper {
     @Select("select soft_apply.exam_id, start_time, soft_apply.test_id, application_time, score, user_id from soft_apply join soft_examinfo on soft_apply.exam_id = soft_examinfo.exam_id where user_id = #{user_id}")
     List<ResultInfo> queryExamsResult(int user_id);
 
-    @Select("select exam_id,user_id from soft_answer")
+    @Select("select exam_id,user_id, grading_status from soft_answer")
     List<AnswerInfoForGet> getAllAnswerInfo();
 
     @Select("select * from soft_answer where exam_id = #{exam_id} and user_id = #{user_id}")
     AnswerInfo getAnswerInfo(int exam_id, int user_id);
+
+    @Select("select test_id from soft_examinfo where exam_id = #{exam_id} and user_id = #{user_id}")
+    int getTestId(int exam_id, int user_id);
+
+    @Select("select choiceW1,choiceW2,choiceW3,choiceW4,choiceW5,choiceW6,choiceW7,choiceW8,choiceW9,choiceW10 from soft_paper where test_id = #{test_id}")
+    ChoiceAnswers getChoiceAnswers(int test_id);
 }
