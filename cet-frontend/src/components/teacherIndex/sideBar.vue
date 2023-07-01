@@ -3,6 +3,11 @@
 import {Avatar, EditPen, Menu, Document} from "@element-plus/icons-vue";
 import router from "@/router";
 
+const handleSelectGrading = () => {
+  router.push('/teacher/index/gradePaper');
+  console.log(router.currentRoute);
+}
+
 const handleSelectPaper = () => {
   router.push('/teacher/index/paperList');
   console.log(router.currentRoute);
@@ -43,7 +48,7 @@ const handleSelectApplyInfo = () => {
         <el-menu-item index="2-3">我的考场安排</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
-    <el-menu-item index="3">
+    <el-menu-item index="gradingPapers" @click="handleSelectGrading">
       <el-icon><Menu /></el-icon>
       <span>考试阅卷系统</span>
     </el-menu-item>

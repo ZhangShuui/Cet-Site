@@ -79,7 +79,12 @@ const router = createRouter({
           path: 'paperList',
           name: 'paper-list',
           component: () => import('@/components/paperCreate/paperList.vue')
-        }
+        },
+        {
+          path: 'gradePaper',
+          name: 'grade-paper',
+          component: () => import('@/components/gradingPaper/gradePaper.vue')
+        },
       ]
     }
   ]
