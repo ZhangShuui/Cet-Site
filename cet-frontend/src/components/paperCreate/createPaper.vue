@@ -297,7 +297,7 @@
 
   <div style="margin-top: 50px" align="center">
     <el-button type="primary" @click="onSubmit">添加试卷</el-button>
-    <el-button>取消</el-button>
+    <el-button @click="onCancel">取消</el-button>
   </div>
 
 
@@ -306,10 +306,20 @@
 <script setup>
 
 import {reactive, ref} from "vue";
-import {post} from "@/net";
+import {get, post} from "@/net";
 import {ElMessage} from "element-plus";
 import router from "@/router";
 
+const onCancel = () => {
+  get('api/paper/cancle',()=>{
+    ElMessage.success("取消成功");
+    router.push('/teacher/index/paperList');
+  },()=>{
+    ElMessage.error("发生错误");
+    router.push('/teacher/index/paperList');
+  })
+  console.log(router.currentRoute);
+}
 
 const onSubmit = () => {
   post('/api/paper/create-choice', {
@@ -347,8 +357,8 @@ const onSubmit = () => {
                         readingQ1: form_paper.readingQ1, readingQ2: form_paper.readingQ2, choiceW6: form_paper.choiceW6, choiceW7: form_paper.choiceW7, choiceW8: form_paper.choiceW8,
                         choiceW9: form_paper.choiceW9, choiceW10: form_paper.choiceW10, translationQ: form_paper.translationQ, writingQ: form_paper.writingQ
                       },()=>{
-                        ElMessage.success("创建试卷成功")
-
+                        ElMessage.success("创建试卷成功");
+                        router.push('/teacher/index/paperList');
                       })
                     })
                   })
@@ -362,7 +372,7 @@ const onSubmit = () => {
   },()=> {
     ElMessage.error("请填写完整的试卷信息")
   })
-  console.log('submit!')
+  console.log(router.currentRoute);
 }
 
 

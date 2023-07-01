@@ -15,7 +15,7 @@ public class PaperHandleServiceImpl implements PaperHandleService {
     @Resource
     PaperMapper paperMapper;
 
-    private ArrayList<String> choices;
+    private ArrayList<String> choices = new ArrayList<>();
 
     @Override
     public int createPaper(String choiceQ1, String choiceW1, String choiceQ2,

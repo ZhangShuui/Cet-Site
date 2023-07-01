@@ -58,10 +58,10 @@ public class PaperController {
         }
         PaperInfo paperInfo = new PaperInfo(choices.get(0), choiceW1, choices.get(1), choiceW2, choices.get(2), choiceW3, choices.get(3),
                 choiceW4, choices.get(4), choiceW5, readingQ1, readingQ2, choices.get(5), choiceW6, choices.get(6), choiceW7, choices.get(7), choiceW8, choices.get(8),
-                choiceW9, choices.get(10), choiceW10, translationQ, writingQ);
+                choiceW9, choices.get(9), choiceW10, translationQ, writingQ);
         int res = paperHandleServiceimpl.createPaper(choices.get(0), choiceW1, choices.get(1), choiceW2, choices.get(2), choiceW3, choices.get(3),
                 choiceW4, choices.get(4), choiceW5, readingQ1, readingQ2, choices.get(5), choiceW6, choices.get(6), choiceW7, choices.get(7), choiceW8, choices.get(8),
-                choiceW9, choices.get(10), choiceW10, translationQ, writingQ);
+                choiceW9, choices.get(9), choiceW10, translationQ, writingQ);
         paperHandleServiceimpl.clearChoices();
         if(res == 1) {
             return RestBean.success("创建试卷成功");
