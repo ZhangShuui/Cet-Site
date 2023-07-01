@@ -36,4 +36,7 @@ public interface ExamineeMapper {
     int queryOneExamResult(int user_id, int exam_id);
     @Select("select soft_apply.exam_id, start_time, soft_apply.test_id, application_time, score, user_id from soft_apply join soft_examinfo on soft_apply.exam_id = soft_examinfo.exam_id where user_id = #{user_id}")
     List<ResultInfo> queryExamsResult(int user_id);
+
+    @Select("select * from soft_answer")
+    List<AnswerInfo> getAllAnswerInfo();
 }

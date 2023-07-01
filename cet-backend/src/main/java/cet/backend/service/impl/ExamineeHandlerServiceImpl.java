@@ -89,4 +89,9 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
     public List<ResultInfo> QueryExamsResults(int user_id) {
         return mapper.queryExamsResult(user_id);
     }
+
+    @Override
+    public List<AnswerInfo> getAllAnswerInfo() {
+        return mapper.getAllAnswerInfo();
+    }
 }
