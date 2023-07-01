@@ -19,7 +19,42 @@ public class PaperController {
     @Resource
     PaperHandleServiceImpl paperHandleServiceimpl;
 
+    public int preview_id=-1;
 
+    @PostMapping("/set-preview-id")
+    public RestBean<Boolean> setPreviewId(@RequestParam("test_id") int test_id){
+        preview_id = test_id;
+        if(preview_id>0) {
+            return RestBean.success(true);
+        }else {
+            return RestBean.failure(400,false);
+        }
+    }
+
+    @GetMapping("/get-preview-id")
+    public RestBean<Integer> getPreviewId(){
+        return RestBean.success(preview_id);
+    }
+
+    @PostMapping("/get-paper-byid")
+    public RestBean<SplitedPaper> GetPaper(@RequestParam("test_id") int test_id) {
+        //教师前端向后端请求试卷
+        System.out.println(test_id);
+        PaperInfo paper = paperHandleServiceimpl.ShowTeacherThePaper(test_id);
+        if(paper != null) {
+            SplitedPaper splitedPaper = splitpaper(paper);
+            System.out.println(splitedPaper);
+            return RestBean.success(splitedPaper);
+        }else {
+            System.out.println("获取到了空试卷,可能数据库里没有数据");
+            return RestBean.failure(400, null);
+        }
+    }
+
+    private SplitedPaper splitpaper(PaperInfo paper) {
+        SplitedPaper res = new SplitedPaper(paper);
+        return res;
+    }
     @PostMapping("/create-choice")
     public RestBean<Boolean> CreateChoice( @RequestParam("Topic") String Topic,
                                            @RequestParam("OptionA") String OptionA,

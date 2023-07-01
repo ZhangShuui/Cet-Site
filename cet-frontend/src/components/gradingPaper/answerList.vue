@@ -1,15 +1,16 @@
 <template>
   <div style="margin-left: 30px">
     <el-text size="large" style="margin-bottom: 50px">
-      <el-icon size="string" style="margin-right: 5px "><Bell/></el-icon><span style="font-size: 20px;font-weight: bold">试题信息</span>
+      <el-icon size="string" style="margin-right: 5px "><Bell/></el-icon><span style="font-size: 20px;font-weight: bold">答卷信息</span>
     </el-text>
-    <el-table :data="paperForm.list"
-              style="width: 100%; margin-top: 10px" >
-      <el-table-column fixed prop="test_id" label="试题编号" />
-      <el-table-column fixed="right" label="操作">
+
+    <el-table :data="answerForm.list"
+              style="width: 200%; margin-top: 10px" >
+      <el-table-column fixed prop="exam_id" label="考试编号"  />
+      <el-table-column prop="user_id" label="考生编号" />
+      <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
-          <el-button link type="primary" @click="clickPreview(scope.$index)">查看</el-button>
-          <el-button link type="primary" @click="clickDelete(scope.$index)">删除</el-button>
+          <el-button link type="primary" @click="clickPreview(scope.$index)">开始阅卷</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -32,7 +33,7 @@ import router from "@/router";
 
 const store = useStore();
 
-const paperForm = reactive({
+const answerForm = reactive({
   list: []
 })
 
@@ -42,9 +43,9 @@ const paperInfo = reactive({
 
 const refreshData = () => {
   get("/api/paper/paper-list", (message)=>{
-    paperForm.list = []
-    paperForm.list.push(...message);
-    console.log(paperForm)
+    answerForm.list = []
+    answerForm.list.push(...message);
+    console.log(answerForm)
     router.push("/teacher/index/paperList");
   }, (message) => {
     console.log(message);
@@ -57,7 +58,7 @@ onMounted(() => {
 
 
 const clickPreview = (scope) => {
-  paperInfo.test_id = paperForm.list[scope].test_id;
+  paperInfo.test_id = answerForm.list[scope].test_id;
   if (paperInfo.test_id === -1){
     ElMessage.warning("请选择试题")
   } else {
@@ -65,14 +66,13 @@ const clickPreview = (scope) => {
       test_id: paperInfo.test_id
     },()=>{
       // router
-      router.push("/teacher/index/showPaper")
     })
   }
 
 }
 
 const clickDelete = (scope) =>{
-  paperInfo.test_id = paperForm.list[scope].test_id;
+  paperInfo.test_id = answerForm.list[scope].test_id;
   if (paperInfo.test_id === -1){
     ElMessage.warning("请选择试题")
   } else {

@@ -27,4 +27,6 @@ public interface ExamineeHandlerService {
     int QueryOneExamResult(int user_id, int exam_id);
 
     List<ResultInfo> QueryExamsResults(int user_id);
+
+    List<AnswerInfo> getAllAnswerInfo();
 }

@@ -43,6 +43,7 @@ public class ExamineeController {
         }
     }
 
+
     private SplitedPaper splitpaper(PaperInfo paper) {
         SplitedPaper res = new SplitedPaper(paper);
         return res;
@@ -118,4 +119,11 @@ public class ExamineeController {
             return RestBean.failure(400,-1);
         }
     }
+
+    @PostMapping("auto-grading")
+    public RestBean<Boolean> autoGrading(@RequestParam("exam_id") int exam_id,
+                                         @RequestParam("user_id") int user_id ){
+        return null;
+    }
+
 }

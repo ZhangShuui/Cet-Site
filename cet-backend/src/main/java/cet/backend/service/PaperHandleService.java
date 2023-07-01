@@ -26,4 +26,6 @@ public interface PaperHandleService {
     List<Integer> getPaperIdList();
 
     boolean deletePaperInfo(int test_id);
+
+    PaperInfo ShowTeacherThePaper(int test_id);
 }
