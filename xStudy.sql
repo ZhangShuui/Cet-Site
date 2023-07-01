@@ -37,6 +37,7 @@ CREATE TABLE `persistent_logins` (
 
 LOCK TABLES `persistent_logins` WRITE;
 /*!40000 ALTER TABLE `persistent_logins` DISABLE KEYS */;
+INSERT INTO `persistent_logins` VALUES ('mqj','6fHQaxtUpXmryMK63krvVg==','pBA9lFYF30mK/jIFFSCChA==','2023-06-30 19:14:11');
 /*!40000 ALTER TABLE `persistent_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,6 +73,7 @@ CREATE TABLE `soft_answer` (
 
 LOCK TABLES `soft_answer` WRITE;
 /*!40000 ALTER TABLE `soft_answer` DISABLE KEYS */;
+INSERT INTO `soft_answer` VALUES (1,1,'A','B','C','D','A','B','C','D','A','B','SADDA','GFDS');
 /*!40000 ALTER TABLE `soft_answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,6 +101,7 @@ CREATE TABLE `soft_apply` (
 
 LOCK TABLES `soft_apply` WRITE;
 /*!40000 ALTER TABLE `soft_apply` DISABLE KEYS */;
+INSERT INTO `soft_apply` VALUES (2,3,'已支付','1',-1,1);
 /*!40000 ALTER TABLE `soft_apply` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +126,7 @@ CREATE TABLE `soft_examinfo` (
 
 LOCK TABLES `soft_examinfo` WRITE;
 /*!40000 ALTER TABLE `soft_examinfo` DISABLE KEYS */;
-INSERT INTO `soft_examinfo` VALUES (1,'2023-06-30 08:51:59',1);
+INSERT INTO `soft_examinfo` VALUES (1,'2023-06-30 08:51:59',1),(2,'2023-07-01 05:19:07',2);
 /*!40000 ALTER TABLE `soft_examinfo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-30 22:54:16
+-- Dump completed on 2023-07-01 15:35:12

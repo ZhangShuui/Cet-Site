@@ -29,10 +29,6 @@ const VerifyMe = () => {
     form.username = message.username
     get('/api/examinee/get-act-exam', (message) => {
       form.exam_id = message.exam_id
-      // ElMessage.success(form.exam_id + " exam_id")
-      // ElMessage.success(form.id + " id")
-      // ElMessage.success(form.email + " email")
-      // ElMessage.success(form.username + " username")
       post('/api/examinee/check-eligibility', {
         user_id: form.id,
         exam_id: form.exam_id,
