@@ -65,6 +65,7 @@ const clickPreview = (scope) => {
       test_id: paperInfo.test_id
     },()=>{
       // router
+      router.push("/teacher/index/showPaper")
     })
   }
 

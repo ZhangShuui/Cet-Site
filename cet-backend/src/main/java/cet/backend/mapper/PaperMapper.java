@@ -1,5 +1,6 @@
 package cet.backend.mapper;
 
+import cet.backend.entity.ExamRelated.PaperInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public interface PaperMapper {
 
     @Select("select test_id from soft_paper")
     List<Integer> getPaperIdList();
+
+    @Select("select * from soft_paper where test_id=#{test_id}")
+    PaperInfo getPaperById(int test_id);
 
     @Delete("delete from soft_paper where test_id=#{test_id}")
     int deletePaperInfo(int test_id);

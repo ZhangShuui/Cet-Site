@@ -43,6 +43,7 @@ public class ExamineeController {
         }
     }
 
+
     private SplitedPaper splitpaper(PaperInfo paper) {
         SplitedPaper res = new SplitedPaper(paper);
         return res;
