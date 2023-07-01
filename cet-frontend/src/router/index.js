@@ -57,6 +57,15 @@ const router = createRouter({
           path:'showresult',
           name:'show-result',
           component:() => import('@/components/ExamRelated/ShowResult.vue')
+        },
+        {
+          path: 'projectInstruction',
+          name: "project-instruction",
+          component:() => import('@/components/index/projectInstruction.vue')
+        },{
+          path: 'cetTestInfo',
+          name: 'cet-test-info',
+          component:() => import('@/components/index/cetTestInfo.vue')
         }
       ]
     },
