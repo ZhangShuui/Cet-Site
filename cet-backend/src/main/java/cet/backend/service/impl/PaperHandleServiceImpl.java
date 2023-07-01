@@ -1,5 +1,6 @@
 package cet.backend.service.impl;
 
+import cet.backend.entity.ExamRelated.PaperInfo;
 import cet.backend.entity.ExamRelated.choiceQuestion;
 import cet.backend.mapper.PaperMapper;
 import cet.backend.service.PaperHandleService;
@@ -60,5 +61,10 @@ public class PaperHandleServiceImpl implements PaperHandleService {
     @Override
     public boolean deletePaperInfo(int test_id) {
         return paperMapper.deletePaperInfo(test_id)>0;
+    }
+
+    @Override
+    public PaperInfo ShowTeacherThePaper(int test_id) {
+        return paperMapper.getPaperById(test_id);
     }
 }

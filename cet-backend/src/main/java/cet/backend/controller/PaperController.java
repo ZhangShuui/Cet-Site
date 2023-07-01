@@ -36,6 +36,25 @@ public class PaperController {
         return RestBean.success(preview_id);
     }
 
+    @PostMapping("/get-paper-byid")
+    public RestBean<SplitedPaper> GetPaper(@RequestParam("test_id") int test_id) {
+        //教师前端向后端请求试卷
+        System.out.println(test_id);
+        PaperInfo paper = paperHandleServiceimpl.ShowTeacherThePaper(test_id);
+        if(paper != null) {
+            SplitedPaper splitedPaper = splitpaper(paper);
+            System.out.println(splitedPaper);
+            return RestBean.success(splitedPaper);
+        }else {
+            System.out.println("获取到了空试卷,可能数据库里没有数据");
+            return RestBean.failure(400, null);
+        }
+    }
+
+    private SplitedPaper splitpaper(PaperInfo paper) {
+        SplitedPaper res = new SplitedPaper(paper);
+        return res;
+    }
     @PostMapping("/create-choice")
     public RestBean<Boolean> CreateChoice( @RequestParam("Topic") String Topic,
                                            @RequestParam("OptionA") String OptionA,
