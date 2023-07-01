@@ -24,22 +24,25 @@
     </el-table-column>
   </el-table>
   <el-divider style="visibility: hidden"/>
-  <el-card style="width: 200px">
-    <template #header><span>查询考试信息</span></template>
-    <el-text>考试编号</el-text>
-    <el-input v-model="searchExamId" size="small" placeholder="e_id" style="margin-top: 10px;margin-bottom:10px ;margin-right: 10px;width: auto"/>
-    <el-text>用户编号</el-text>
-    <el-input v-model="searchUserId" size="small" placeholder="u_id" style="margin-top: 10px;margin-right: 10px;width: auto"/>
-    <el-button size="small" @click="handleSearch()" style="margin-top: 10px">search</el-button>
-  </el-card>
-  <el-card style="width: 200px">
-    <template #header><span>添加考试信息</span></template>
-    <el-text>考试编号</el-text>
-    <el-input v-model="searchExamId" size="small" placeholder="e_id" style="margin-top: 10px;margin-bottom:10px ;margin-right: 10px;width: auto"/>
-    <el-text>用户编号</el-text>
-    <el-input v-model="searchUserId" size="small" placeholder="u_id" style="margin-top: 10px;margin-right: 10px;width: auto"/>
-    <el-button size="small" @click="handleSearch()" style="margin-top: 10px">add</el-button>
-  </el-card>
+  <el-row align="middle">
+    <el-card style="width: 200px; margin-left: 300px;margin-right: 100px">
+      <template #header><span>查询考试信息</span></template>
+      <el-text>考试编号</el-text>
+      <el-input v-model="searchExamId" size="small" placeholder="e_id" style="margin-top: 5px;margin-bottom:10px ;margin-right: 10px;width: auto"/>
+      <el-text>用户编号</el-text>
+      <el-input v-model="searchUserId" size="small" placeholder="u_id" style="margin-top: 10px;margin-right: 10px;width: auto"/>
+      <el-button size="small" @click="handleSearch()" style="margin-top: 10px">search</el-button>
+    </el-card>
+    <el-card style="width: 200px">
+      <template #header><span>添加考试信息</span></template>
+      <el-text>考试编号</el-text>
+      <el-input v-model="addExamId" size="small" placeholder="e_id" style="margin-top: 5px;margin-bottom:10px ;margin-right: 10px;width: auto"/>
+      <el-text>用户编号</el-text>
+      <el-input v-model="addUserId" size="small" placeholder="u_id" style="margin-top: 10px;margin-right: 10px;width: auto"/>
+      <el-button size="small" @click="handleAdd()" style="margin-top: 10px">add</el-button>
+    </el-card>
+  </el-row>
+
   <el-dialog v-model="dialogFormVisible" title="修改报考信息">
     <el-form :model="editForm">
       <el-form-item label="考试编号">
@@ -147,6 +150,18 @@ const handleSearch = () => {
     ElMessage.success("查询信息成功")
   }, (message) => {
     ElMessage.warning("查询信息失败")
+  })
+}
+
+const handleAdd = () => {
+  post("api/apply/apply-for-test-back", {
+    exam_id: addExamId.value,
+    user_id: addUserId.value
+  }, (message) => {
+    ElMessage.success(message);
+    reFreshData();
+  }, (message) => {
+    ElMessage.warning(message)
   })
 }
 

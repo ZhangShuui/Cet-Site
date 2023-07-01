@@ -39,6 +39,26 @@ public class ApplyInfoController {
         }
     }
 
+    @PostMapping("/apply-for-test-back")
+    public RestBean<String> applyFotTestBack(@RequestParam("exam_id") String s_exam_id,
+                                         @RequestParam("user_id") String s_user_id){
+        Integer exam_id;
+        Integer user_id;
+        if (s_exam_id.equals("") || s_user_id.equals(""))
+            return RestBean.failure(400, "请填写申请的id");
+        else {
+            exam_id = Integer.valueOf(s_exam_id);
+            user_id = Integer.valueOf(s_user_id);
+        }
+
+        if (service.applyTestByUser(exam_id, user_id)){
+            return RestBean.success("申请考试成功");
+        }else {
+            return RestBean.failure(400, "申请失败");
+        }
+    }
+
+
     @PostMapping("/find-apply-info")
     public RestBean<List<ApplyInfo>> findApplyInfo(@RequestParam("exam_id") String s_exam_id,
                                                    @RequestParam("user_id") String s_user_id){
