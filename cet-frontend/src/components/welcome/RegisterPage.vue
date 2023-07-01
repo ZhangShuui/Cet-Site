@@ -60,13 +60,13 @@
         </el-form-item>
       </el-form>
     </div>
-    <div style="margin-top: 80px">
-      <el-button style="width: 270px" type="warning" @click="register" plain>立即注册</el-button>
-    </div>
-    <div style="margin-top: 20px">
-      <span style="font-size: 14px;line-height: 15px;color: grey">已有账号? </span>
-      <el-link type="primary" style="translate: 0 -2px" @click="router.push('/')">立即登录</el-link>
-    </div>
+<!--    <div style="margin-top: 80px">-->
+<!--      <el-button style="width: 270px" type="warning" @click="register" plain>立即注册</el-button>-->
+<!--    </div>-->
+<!--    <div style="margin-top: 20px">-->
+<!--      <span style="font-size: 14px;line-height: 15px;color: grey">已有账号? </span>-->
+<!--      <el-link type="primary" style="translate: 0 -2px" @click="router.push('/')">立即登录</el-link>-->
+<!--    </div>-->
   </div>
 </template>
 

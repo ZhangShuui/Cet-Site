@@ -16,7 +16,10 @@ public class PaperController {
     @Resource
     PaperHandleServicelmpl paperHandleServicelmpl;
 
-    @PostMapping("/create_paper")       //新建试卷
+
+
+
+    @PostMapping("/create-paper")       //新建试卷
     public RestBean<String> CreatePaper(@RequestParam("test_id") int test_id,
                                         @RequestParam("choiceQ1") String choiceQ1,
                                         @RequestParam("choiceW1") String choiceW1,
@@ -45,10 +48,10 @@ public class PaperController {
                                         ) {
 
         PaperInfo paperInfo = new PaperInfo(test_id, choiceQ1, choiceW1, choiceQ2, choiceW2, choiceQ3, choiceW3, choiceQ4,
-                choiceW4, choiceQ5, choiceW5, choiceQ6, choiceW6, choiceQ7, choiceW7, choiceQ8, choiceW8, choiceQ9,
+                choiceW4, choiceQ5, choiceW5, readingQ1, readingQ2, choiceQ6, choiceW6, choiceQ7, choiceW7, choiceQ8, choiceW8, choiceQ9,
                 choiceW9, choiceQ10, choiceW10, translationQ, writingQ);
         int res = paperHandleServicelmpl.createPaper(test_id, choiceQ1, choiceW1, choiceQ2, choiceW2, choiceQ3, choiceW3, choiceQ4,
-                choiceW4, choiceQ5, choiceW5, choiceQ6, choiceW6, choiceQ7, choiceW7, choiceQ8, choiceW8, choiceQ9,
+                choiceW4, choiceQ5, choiceW5, readingQ1, readingQ2, choiceQ6, choiceW6, choiceQ7, choiceW7, choiceQ8, choiceW8, choiceQ9,
                 choiceW9, choiceQ10, choiceW10, translationQ, writingQ);
         if(res == 1) {
             return RestBean.success("创建试卷成功");

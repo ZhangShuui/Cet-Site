@@ -2,13 +2,14 @@
   <el-text size="large" style="margin-bottom: 50px">
       <el-icon size="string" style="margin-right: 5px"><Bell/></el-icon><span>待报考的考试</span>
   </el-text>
-  <el-table :data="tableData" style="width: 100%; margin-top: 10px">
-    <el-table-column fixed prop="date" label="考试编号" width="250" />
-    <el-table-column prop="date" label="考试日期" width="250" />
-    <el-table-column prop="name" label="报考截止" width="250" />
+  <el-table :data="applyForm.list"
+            style="width: 100%; margin-top: 10px" >
+    <el-table-column fixed prop="exam_id" label="考试编号" width="250" />
+    <el-table-column prop="start_time" label="考试日期" width="250" />
+    <el-table-column prop="ddl" label="报考截止" width="250" />
     <el-table-column fixed="right" label="操作" width="250">
-      <template #default>
-        <el-button link type="primary" >报考</el-button>
+      <template v-slot="scope">
+        <el-button link type="primary" @click="clickApply(scope.$index)">报考</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -21,108 +22,156 @@
     <el-icon size="string" style="margin-right: 5px"><Bell/></el-icon><span>已报考的考试</span>
   </el-text>
 
-  <el-table :data="tableData" style="width: 100%; margin-top: 10px">
-    <el-table-column fixed prop="date" label="考试编号" width="250" />
-    <el-table-column prop="date" label="考试日期" width="250" />
-    <el-table-column prop="name" label="报考截止" width="250" />
-    <el-table-column fixed="right" label="操作">
+  <el-table :data="quitForm.list" style="width: 100%; margin-top: 10px">
+    <el-table-column fixed prop="exam_id" label="考试编号" width="250" />
+    <el-table-column prop="start_time" label="考试日期" width="250" />
+    <el-table-column prop="payment_status" label="支付状态" width="200"/>
+    <el-table-column prop="ddl" label="退考截止" width="250" />
+
+    <el-table-column label="操作">
       <template v-slot="scope">
-        <el-button link type="primary" @click="clickApply(scope.$index)">退考</el-button>
+        <el-button link type="primary" @click="clickQuit(scope.$index)">退考</el-button>
+        <el-button link type="primary" @click="clickPay(scope.$index)">支付</el-button>
       </template>
     </el-table-column>
   </el-table>
+
+  <el-dialog
+      v-model="centerDialogVisible"
+      title="Warning"
+      width="30%"
+      align-center
+  >
+    <span>确认支付？</span>
+
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="centerDialogVisible = false">取消支付</el-button>
+        <el-button type="primary" @click="clickForPay">
+          完成支付
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
 
 import {Bell, StarFilled} from "@element-plus/icons-vue";
 import {useStore} from "@/stores";
-import {reactive} from "vue";
+import {onMounted, reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
-import {post} from "@/net";
+import {get, post} from "@/net";
+import router from "@/router";
 
-const tableData = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Home',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Home',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  },
-]
+const store = useStore();
+
+const centerDialogVisible = ref(false)
 const applyForm = reactive({
-  user_id: useStore.$id,
-  exam_id: -1,
+  list: []
 })
 
 const quitForm = reactive({
-  user_id: useStore.$id,
+  list: []
+})
+
+const applyInfo = ref({
+  user_id: store.auth.user.id,
   exam_id: -1,
 })
 
+const quitInfo = ref({
+  user_id: store.auth.user.id,
+  exam_id: -1,
+})
+
+const payInfo = ref({
+  user_id: store.auth.user.id,
+  exam_id: -1,
+})
+
+const refreshData = () => {
+  post("/api/examinfo/test/canTake", {
+    user_id: store.auth.user.id
+  }, (message) => {
+    applyForm.list = []
+    applyForm.list.push(...message);
+    console.log(applyForm)
+    router.push("index/apply");
+    // console.log(applyForm)
+    post("api/examinfo/test/canQuit", {
+      user_id: store.auth.user.id
+    }, (message) => {
+      quitForm.list = []
+      quitForm.list.push(...message);
+      console.log(quitForm)
+      router.push("index/apply");
+    }, (message) => {
+      console.log(message);
+    })
+  }, (message) => {
+    console.log(message);
+  })
+}
+
+onMounted(() => {
+  refreshData()
+})
+
+
 const clickApply = (scope) => {
-  console.info(tableData[scope].date)
+  //console.info(tableData[scope].date)
+  applyInfo.exam_id = applyForm.list[scope].exam_id
+  applyForTest()
+}
+
+const clickQuit = (scope) => {
+  quitInfo.exam_id = quitForm.list[scope].exam_id
+  quitTest()
+}
+
+const clickPay = (scope) => {
+  payInfo.exam_id = quitForm.list[scope].exam_id;
+  centerDialogVisible.value = true
+}
+
+const clickForPay = () => {
+  centerDialogVisible.value = false
+  post("api/apply/payment-submit",{
+    user_id: store.auth.user.id,
+    exam_id: payInfo.exam_id
+  }, (message) => {
+    ElMessage.success(message)
+    refreshData()
+  }, (message) => {
+    ElMessage.warning(message)
+  })
 }
 
 const applyForTest = () => {
-  if (applyForm.exam_id === -1){
+  if (applyInfo.exam_id === -1){
     ElMessage.warning("请选择考试进行报考")
   } else {
     post('/api/apply/apply-for-test', {
-      user_id: applyForm.user_id,
-      exam_id: applyForm.exam_id
+      user_id: store.auth.user.id,
+      exam_id: applyInfo.exam_id
     }, (message) => {
-      if (message.success){
-        ElMessage.success(message)
-      }else {
-        ElMessage.warning("报考失败，请选择其他考试报考")
-      }
+      ElMessage.success(message);
+      refreshData()
     })
   }
 }
 
 const quitTest = () => {
-  if (applyForm.exam_id === -1){
+  if (quitInfo.exam_id === -1){
     ElMessage.warning("请选择考试进行退考")
   }else {
     post('/api/apply/delete-apply-info', {
-      user_id: quitForm.user_id,
-      exam_id: quitForm.exam_id
+      user_id: store.auth.user.id,
+      exam_id: quitInfo.exam_id
     }, (message) => {
-      if (message.success){
-        ElMessage.success(message)
-      }else {
-        ElMessage.warning("退考失败，请选择其他考试退考")
-      }
+      ElMessage.success(message)
+      refreshData()
     })
   }
 }

@@ -7,7 +7,7 @@ import cet.backend.entity.ExamRelated.PaperInfo;
 public interface ExamineeHandlerService {
     boolean AmIVerified(int user_id, int exam_id);
 
-    PaperInfo ShowMeThePaper(int test_id);
+    PaperInfo ShowMeThePaper(int user_id, int exam_id);
 
     boolean IsTimeOut(int exam_id);
 

@@ -30,8 +30,8 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
     }
 
     @Override
-    public PaperInfo ShowMeThePaper(int test_id) {
-        return mapper.GetPaper(test_id);
+    public PaperInfo ShowMeThePaper(int user_id, int exam_id) {
+        return mapper.GetPaper(user_id, exam_id);
     }
 
     @Override

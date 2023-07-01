@@ -3,11 +3,11 @@ package cet.backend.controller;
 import cet.backend.entity.ExamRelated.AnswerInfo;
 import cet.backend.entity.ExamRelated.ExamInfo;
 import cet.backend.entity.ExamRelated.PaperInfo;
+import cet.backend.entity.ExamRelated.SplitedPaper;
 import cet.backend.entity.RestBean;
 import cet.backend.service.impl.ExamineeHandlerServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @RequestMapping("/api/examinee")
 public class ExamineeController {
@@ -17,8 +17,7 @@ public class ExamineeController {
     @PostMapping("/check-eligibility")//检验学生的报考信息
     public RestBean<Boolean> CheckEligibility(@RequestParam("user_id") int user_id,
                                               @RequestParam("exam_id") int exam_id) {//前端向后端发送请求,检查我是否具备本场考试资格
-        System.out.println(user_id);
-        System.out.println(exam_id);
+
         if(examineeHandlerService.AmIVerified(user_id,exam_id)) {
             return RestBean.success(true);
         }else {
@@ -27,15 +26,25 @@ public class ExamineeController {
     }
 
     @PostMapping("/get-paper")
-    public RestBean<PaperInfo> GetPaper(@RequestParam("test_id") int test_id) {
+    public RestBean<SplitedPaper> GetPaper(@RequestParam("user_id") int user_id, @RequestParam("exam_id") int exam_id) {
         //前端向后端请求试卷
-        PaperInfo paper = examineeHandlerService.ShowMeThePaper(test_id);
+        System.out.println(user_id);
+        System.out.println(exam_id);
+        PaperInfo paper = examineeHandlerService.ShowMeThePaper(user_id, exam_id);
+
         if(paper != null) {
-            return RestBean.success(paper);
+            SplitedPaper splitedPaper = splitpaper(paper);
+            System.out.println(splitedPaper);
+            return RestBean.success(splitedPaper);
         }else {
+            System.out.println("获取到了空试卷,可能数据库里没有数据");
             return RestBean.failure(400, null);
         }
+    }
 
+    private SplitedPaper splitpaper(PaperInfo paper) {
+        SplitedPaper res = new SplitedPaper(paper);
+        return res;
     }
 
     @PostMapping("/get-timeout")

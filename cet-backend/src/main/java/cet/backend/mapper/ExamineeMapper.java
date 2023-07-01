@@ -14,8 +14,8 @@ public interface ExamineeMapper {
     //进入考试页面后,后台检查次考生是否有考试资格
     @Select("select user_id from soft_apply where exam_id = #{exam_id} and payment_status ='已支付' ")
     List<Integer> GetCandidates(int exam_id);
-    @Select("select * from soft_paper where test_id = #{test_id}")
-    PaperInfo GetPaper(int test_id);
+    @Select("select * from soft_paper where test_id = (select test_id from soft_apply where user_id = #{user_id} and exam_id = #{exam_id})")
+    PaperInfo GetPaper(int user_id, int exam_id);
     @Select("select start_time from soft_examinfo where exam_id = #{exam_id}")
     Timestamp GetStartTime(int exam_id);
     @Select("select * from soft_examinfo")
