@@ -5,6 +5,7 @@ import {get, post} from "@/net";
 import {ElMessage} from "element-plus";
 import {useStore} from "@/stores";
 import { ref } from 'vue'
+import router from "@/router";
 
 const store = useStore()
 
@@ -103,96 +104,170 @@ const form_paper = reactive({
   writingQ: '',
 })
 
-
 const submitAns = () => {
   console.log("点击了提交")
+  get("/api/examinee/get-act-exam", (message) => {
+    form_ans.exam_id = message.exam_id
+    post("/api/examinee/submit-answers", {
+      exam_id: form_ans.exam_id,
+      user_id: store.auth.user.id,
+      stu_choiceW1: form_ans.stu_choiceW1,
+      stu_choiceW2: form_ans.stu_choiceW2,
+      stu_choiceW3: form_ans.stu_choiceW3,
+      stu_choiceW4: form_ans.stu_choiceW4,
+      stu_choiceW5: form_ans.stu_choiceW5,
+      stu_choiceW6: form_ans.stu_choiceW6,
+      stu_choiceW7: form_ans.stu_choiceW7,
+      stu_choiceW8: form_ans.stu_choiceW8,
+      stu_choiceW9: form_ans.stu_choiceW9,
+      stu_choiceW10: form_ans.stu_choiceW10,
+      translationW: form_ans.translationW,
+      writingW: form_ans.writingW
+    }, (message) => {
+      ElMessage.success("提交试卷成功,退出考试")
+      router.push('/index')
+    }, () => {
+      ElMessage.error("提交试卷失败")
+    })
+  }, () => {
+    ElMessage.error("获取考试信息失败,你参加的考试已经结束")
+  })
 }
 
+const day = ref('--');
+const hour = ref('--');
+const min = ref('--');
+const sec = ref('--');
+const start = ref(false);
+
+const startCountdown = (start_time) => {
+  console.log(start_time)
+  let minutes = start_time.getMinutes();
+  let newMinutes = minutes + 135;
+  start_time.setMinutes(newMinutes);
+  start.value = true;
+
+  const countdown = setInterval(() => {
+
+    const endDate = start_time.getTime(); // 倒计时结束日期
+    const now = new Date().getTime(); // 当前日期
+
+    const distance = endDate - now; // 剩余时间
+    if (distance < 0) {
+      clearInterval(countdown);
+      submitAns();
+      // 倒计时结束，执行相应逻辑
+    } else {
+      const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+          (distance % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // 更新倒计时变量
+      hour.value = hours;
+      min.value = minutes;
+      sec.value = seconds;
+    }
+  }, 1000);
+};
+
+
+
 onMounted(()=> {
+
   get("/api/examinee/get-act-exam", (message) => {
     let eaxm_id = message.exam_id
-    post("/api/examinee/get-paper", {
-      user_id: store.auth.user.id,
-      exam_id: eaxm_id,
-    }, (paper_msg) => {
-      form_paper.test_id = paper_msg.test_id
-      form_paper.choiceQ1 = paper_msg.q.at(0).topic
-      form_paper.choiceQ1A = paper_msg.q.at(0).optionA
-      form_paper.choiceQ1B = paper_msg.q.at(0).optionB
-      form_paper.choiceQ1C = paper_msg.q.at(0).optionC
-      form_paper.choiceQ1D = paper_msg.q.at(0).optionD
-      form_paper.choiceW1 = paper_msg.choiceW1
+    post("/api/examinfo/test/getStartTime", {
+      exam_id: eaxm_id
+    }, (time_msg) => {
+      const start_date = new Date(time_msg)
+      post("/api/examinee/get-paper", {
+        user_id: store.auth.user.id,
+        exam_id: eaxm_id,
+      }, (paper_msg) => {
+        form_paper.test_id = paper_msg.test_id
+        form_paper.choiceQ1 = paper_msg.q.at(0).topic
+        form_paper.choiceQ1A = paper_msg.q.at(0).optionA
+        form_paper.choiceQ1B = paper_msg.q.at(0).optionB
+        form_paper.choiceQ1C = paper_msg.q.at(0).optionC
+        form_paper.choiceQ1D = paper_msg.q.at(0).optionD
+        form_paper.choiceW1 = paper_msg.choiceW1
 
-      form_paper.choiceQ2 = paper_msg.q.at(1).topic
-      form_paper.choiceQ2A = paper_msg.q.at(1).optionA
-      form_paper.choiceQ2B = paper_msg.q.at(1).optionB
-      form_paper.choiceQ2C = paper_msg.q.at(1).optionC
-      form_paper.choiceQ2D = paper_msg.q.at(1).optionD
-      form_paper.choiceW2 = paper_msg.choiceW2
+        form_paper.choiceQ2 = paper_msg.q.at(1).topic
+        form_paper.choiceQ2A = paper_msg.q.at(1).optionA
+        form_paper.choiceQ2B = paper_msg.q.at(1).optionB
+        form_paper.choiceQ2C = paper_msg.q.at(1).optionC
+        form_paper.choiceQ2D = paper_msg.q.at(1).optionD
+        form_paper.choiceW2 = paper_msg.choiceW2
 
-      form_paper.choiceQ3 = paper_msg.q.at(2).topic
-      form_paper.choiceQ3A = paper_msg.q.at(2).optionA
-      form_paper.choiceQ3B = paper_msg.q.at(2).optionB
-      form_paper.choiceQ3C = paper_msg.q.at(2).optionC
-      form_paper.choiceQ3D = paper_msg.q.at(2).optionD
-      form_paper.choiceW3 = paper_msg.choiceW3
+        form_paper.choiceQ3 = paper_msg.q.at(2).topic
+        form_paper.choiceQ3A = paper_msg.q.at(2).optionA
+        form_paper.choiceQ3B = paper_msg.q.at(2).optionB
+        form_paper.choiceQ3C = paper_msg.q.at(2).optionC
+        form_paper.choiceQ3D = paper_msg.q.at(2).optionD
+        form_paper.choiceW3 = paper_msg.choiceW3
 
-      form_paper.choiceQ4 = paper_msg.q.at(3).topic
-      form_paper.choiceQ4A = paper_msg.q.at(3).optionA
-      form_paper.choiceQ4B = paper_msg.q.at(3).optionB
-      form_paper.choiceQ4C = paper_msg.q.at(3).optionC
-      form_paper.choiceQ4D = paper_msg.q.at(3).optionD
-      form_paper.choiceW4 = paper_msg.choiceW4
+        form_paper.choiceQ4 = paper_msg.q.at(3).topic
+        form_paper.choiceQ4A = paper_msg.q.at(3).optionA
+        form_paper.choiceQ4B = paper_msg.q.at(3).optionB
+        form_paper.choiceQ4C = paper_msg.q.at(3).optionC
+        form_paper.choiceQ4D = paper_msg.q.at(3).optionD
+        form_paper.choiceW4 = paper_msg.choiceW4
 
-      form_paper.choiceQ5 = paper_msg.q.at(4).topic
-      form_paper.choiceQ5A = paper_msg.q.at(4).optionA
-      form_paper.choiceQ5B = paper_msg.q.at(4).optionB
-      form_paper.choiceQ5C = paper_msg.q.at(4).optionC
-      form_paper.choiceQ5D = paper_msg.q.at(4).optionD
-      form_paper.choiceW5 = paper_msg.choiceW5
+        form_paper.choiceQ5 = paper_msg.q.at(4).topic
+        form_paper.choiceQ5A = paper_msg.q.at(4).optionA
+        form_paper.choiceQ5B = paper_msg.q.at(4).optionB
+        form_paper.choiceQ5C = paper_msg.q.at(4).optionC
+        form_paper.choiceQ5D = paper_msg.q.at(4).optionD
+        form_paper.choiceW5 = paper_msg.choiceW5
 
-      form_paper.choiceQ6 = paper_msg.q.at(5).topic
-      form_paper.choiceQ6A = paper_msg.q.at(5).optionA
-      form_paper.choiceQ6B = paper_msg.q.at(5).optionB
-      form_paper.choiceQ6C = paper_msg.q.at(5).optionC
-      form_paper.choiceQ6D = paper_msg.q.at(5).optionD
-      form_paper.choiceW6 = paper_msg.choiceW6
+        form_paper.choiceQ6 = paper_msg.q.at(5).topic
+        form_paper.choiceQ6A = paper_msg.q.at(5).optionA
+        form_paper.choiceQ6B = paper_msg.q.at(5).optionB
+        form_paper.choiceQ6C = paper_msg.q.at(5).optionC
+        form_paper.choiceQ6D = paper_msg.q.at(5).optionD
+        form_paper.choiceW6 = paper_msg.choiceW6
 
-      form_paper.choiceQ7 = paper_msg.q.at(6).topic
-      form_paper.choiceQ7A = paper_msg.q.at(6).optionA
-      form_paper.choiceQ7B = paper_msg.q.at(6).optionB
-      form_paper.choiceQ7C = paper_msg.q.at(6).optionC
-      form_paper.choiceQ7D = paper_msg.q.at(6).optionD
-      form_paper.choiceW7 = paper_msg.choiceW7
+        form_paper.choiceQ7 = paper_msg.q.at(6).topic
+        form_paper.choiceQ7A = paper_msg.q.at(6).optionA
+        form_paper.choiceQ7B = paper_msg.q.at(6).optionB
+        form_paper.choiceQ7C = paper_msg.q.at(6).optionC
+        form_paper.choiceQ7D = paper_msg.q.at(6).optionD
+        form_paper.choiceW7 = paper_msg.choiceW7
 
-      form_paper.choiceQ8 = paper_msg.q.at(7).topic
-      form_paper.choiceQ8A = paper_msg.q.at(7).optionA
-      form_paper.choiceQ8B = paper_msg.q.at(7).optionB
-      form_paper.choiceQ8C = paper_msg.q.at(7).optionC
-      form_paper.choiceQ8D = paper_msg.q.at(7).optionD
-      form_paper.choiceW8 = paper_msg.choiceW8
+        form_paper.choiceQ8 = paper_msg.q.at(7).topic
+        form_paper.choiceQ8A = paper_msg.q.at(7).optionA
+        form_paper.choiceQ8B = paper_msg.q.at(7).optionB
+        form_paper.choiceQ8C = paper_msg.q.at(7).optionC
+        form_paper.choiceQ8D = paper_msg.q.at(7).optionD
+        form_paper.choiceW8 = paper_msg.choiceW8
 
-      form_paper.choiceQ9 = paper_msg.q.at(8).topic
-      form_paper.choiceQ9A = paper_msg.q.at(8).optionA
-      form_paper.choiceQ9B = paper_msg.q.at(8).optionB
-      form_paper.choiceQ9C = paper_msg.q.at(8).optionC
-      form_paper.choiceQ9D = paper_msg.q.at(8).optionD
-      form_paper.choiceW9 = paper_msg.choiceW9
+        form_paper.choiceQ9 = paper_msg.q.at(8).topic
+        form_paper.choiceQ9A = paper_msg.q.at(8).optionA
+        form_paper.choiceQ9B = paper_msg.q.at(8).optionB
+        form_paper.choiceQ9C = paper_msg.q.at(8).optionC
+        form_paper.choiceQ9D = paper_msg.q.at(8).optionD
+        form_paper.choiceW9 = paper_msg.choiceW9
 
-      form_paper.choiceQ10 = paper_msg.q.at(9).topic
-      form_paper.choiceQ10A = paper_msg.q.at(9).optionA
-      form_paper.choiceQ10B = paper_msg.q.at(9).optionB
-      form_paper.choiceQ10C = paper_msg.q.at(9).optionC
-      form_paper.choiceQ10D = paper_msg.q.at(9).optionD
-      form_paper.choiceW10 = paper_msg.choiceW10
+        form_paper.choiceQ10 = paper_msg.q.at(9).topic
+        form_paper.choiceQ10A = paper_msg.q.at(9).optionA
+        form_paper.choiceQ10B = paper_msg.q.at(9).optionB
+        form_paper.choiceQ10C = paper_msg.q.at(9).optionC
+        form_paper.choiceQ10D = paper_msg.q.at(9).optionD
+        form_paper.choiceW10 = paper_msg.choiceW10
 
-      form_paper.readingQ1 = paper_msg.readingQ1
-      form_paper.readingQ2 = paper_msg.readingQ2
-      form_paper.translationQ = paper_msg.translationQ
-      form_paper.writingQ = paper_msg.writingQ
-      ElMessage.success("获取试卷成功")
-    }, ()=> {
-      ElMessage.error("获取试卷失败")
+        form_paper.readingQ1 = paper_msg.readingQ1
+        form_paper.readingQ2 = paper_msg.readingQ2
+        form_paper.translationQ = paper_msg.translationQ
+        form_paper.writingQ = paper_msg.writingQ
+        ElMessage.success("获取试卷成功")
+        startCountdown(start_date)
+      }, ()=> {
+        ElMessage.error("获取试卷失败")
+      })
     })
   }, () => {
     ElMessage.error("获取考试信息失败")
@@ -203,9 +278,13 @@ const ShowMyAns = () => {
   console.log(form_ans)
 }
 
+
 </script>
 
 <template>
+  <div>
+    <p style="margin-top: 5px; color: red">距离考试结束剩余: {{ hour }}小时 {{ min }}分钟 {{ sec }}秒</p>
+  </div>
   <div>
     <el-form :model="form_ans" label-width="120px">
       <el-card style="margin-top: 10px" class="box-card">
