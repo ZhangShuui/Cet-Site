@@ -61,7 +61,7 @@ const QueryResult = () =>{
             <div class="card-header">
               <el-icon><Bell/></el-icon>
               <el-text style="margin-right: auto">项目简介</el-text>
-              <el-button class="button" text>详细信息</el-button>
+              <el-button class="button" @click="router.push('index/projectInstruction')" text>详细信息</el-button>
             </div>
           </template>
           <el-text>
@@ -75,7 +75,7 @@ const QueryResult = () =>{
             <div class="card-header">
               <el-icon><EditPen /></el-icon>
               <el-text style="margin-right: auto">考试报名</el-text>
-              <el-button class="button" @click="test">详细信息</el-button>
+              <el-button class="button" @click="test" shadow="shadow">详细信息</el-button>
             </div>
           </template>
           <el-text>
@@ -89,7 +89,7 @@ const QueryResult = () =>{
             <div class="card-header">
               <el-icon><Service/></el-icon>
               <el-text style="margin-right: auto">线上考试</el-text>
-              <el-button class="button" text>详细信息</el-button>
+              <el-button class="button" @click="router.push('index/cetTestInfo')" text>详细信息</el-button>
             </div>
           </template>
           <el-text>

@@ -32,8 +32,7 @@ public class ExamInfoHandleServiceImpl implements ExamInfoHandleService {
         calendar.setTime(timestamp);
         calendar.add(Calendar.DATE, -7);
         Timestamp ddlTime = new Timestamp(calendar.getTimeInMillis());
-        logger.info(ddlTime.toString());
-        logger.info("dshdhas"+ cur.toString());
+
         return cur.before(ddlTime);
     }
 

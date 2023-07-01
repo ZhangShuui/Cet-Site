@@ -4,8 +4,6 @@ import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.mapper.ApplyInfoMapper;
 import cet.backend.service.ApplyHandleService;
 import jakarta.annotation.Resource;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
