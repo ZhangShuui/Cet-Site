@@ -48,6 +48,15 @@ const router = createRouter({
           path:'takeexam',
           name:'take-exam',
           component:() => import('@/components/ExamRelated/TakeExam.vue')
+        },
+        {
+          path:'queryresult',
+          name:'query-exam-result',
+          component:() => import('@/components/ExamRelated/QueryResult.vue')
+        }, {
+          path:'showresult',
+          name:'show-result',
+          component:() => import('@/components/ExamRelated/ShowResult.vue')
         }
       ]
     },
@@ -65,6 +74,11 @@ const router = createRouter({
           path: 'applyInfo',
           name: 'apply-info',
           component: () => import('@/components/apply/ApplyInfoShow.vue')
+        },
+        {
+          path: 'paperList',
+          name: 'paper-list',
+          component: () => import('@/components/paperCreate/paperList.vue')
         }
       ]
     }

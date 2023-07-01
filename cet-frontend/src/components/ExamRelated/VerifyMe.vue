@@ -32,7 +32,7 @@ const VerifyMe = () => {
       post('/api/examinee/check-eligibility', {
         user_id: form.id,
         exam_id: form.exam_id,
-      }, () => {
+      }, (message) => {
         ElMessage.success("检测到您具备考试资格,进入考试")
         //在这里跳转
         router.push('/index/takeexam')
@@ -85,7 +85,6 @@ const VerifyMe = () => {
 
 <!--    </div>-->
     <div style="margin-top: 10px"></div>
-<!--    怎么让这两个按钮居中？？？-->
     <div align="center">
       <el-button style="background-color: deepskyblue;color: white" @click="GoBack">返回首页</el-button>
       <el-button style="background-color: deepskyblue;color: white" @click="VerifyMe">进入考试</el-button>

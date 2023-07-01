@@ -495,8 +495,8 @@ const ShowMyAns = () => {
         <template #header>
           <div class="card-header">
             <span style="font-size: 20px; font-weight: bold">Translation</span>
-            <div style="line-height: 20px;font-size: 17px">{{form_paper.translationQ}}</div>
-            <el-form-item style="margin-top: 5px" prop="translationW">
+            <div style=" line-height: 20px;font-size: 17px;margin-top: 10px">{{form_paper.translationQ}}</div>
+            <el-form-item style="margin-top: 10px" prop="translationW">
               <el-input
                   v-model="form_ans.translationW"
                   :autosize="{ minRows: 10, maxRows: 20 }"
@@ -513,8 +513,8 @@ const ShowMyAns = () => {
         <template #header>
           <div class="card-header">
             <span style="font-size: 20px; font-weight: bold">Writing</span>
-            <div style="line-height: 20px;font-size: 17px">{{form_paper.writingQ}}</div>
-            <el-form-item style="margin-top: 5px;margin-left: 0" prop="writingW">
+            <div style="margin-top: 10px;line-height: 20px;font-size: 17px">{{form_paper.writingQ}}</div>
+            <el-form-item style="margin-top: 10px;margin-left: 0" prop="writingW">
               <el-input
                   v-model="form_ans.writingW"
                   :autosize="{ minRows: 10, maxRows: 20 }"

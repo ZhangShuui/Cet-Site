@@ -1,13 +1,14 @@
 package cet.backend.controller;
 
-import cet.backend.entity.ExamRelated.AnswerInfo;
-import cet.backend.entity.ExamRelated.ExamInfo;
-import cet.backend.entity.ExamRelated.PaperInfo;
-import cet.backend.entity.ExamRelated.SplitedPaper;
+import cet.backend.entity.ExamRelated.*;
 import cet.backend.entity.RestBean;
+import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.service.impl.ExamineeHandlerServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/examinee")
 public class ExamineeController {
@@ -67,6 +68,26 @@ public class ExamineeController {
         }
     }
 
+    @PostMapping("/query-one-result")
+    public RestBean<Integer> QueryExamResult(@RequestParam("user_id") int user_id,
+                                             @RequestParam("exam_id") int exam_id) {
+        int res = examineeHandlerService.QueryOneExamResult(user_id,exam_id);
+        if(res != -1) {
+            return RestBean.success(res);
+        } else {
+            return RestBean.failure(400,-1);
+        }
+    }
+
+    @PostMapping("/query-results")
+    public RestBean<List<ResultInfo>> QueryExamResult(@RequestParam("user_id") int user_id) {
+        List<ResultInfo> res = examineeHandlerService.QueryExamsResults(user_id);
+        if(res.size() > 0) {
+            return RestBean.success(res);
+        } else {
+            return RestBean.failure(400,null);
+        }
+    }
 
     @PostMapping("/submit-answers")
     public RestBean<Integer> SubmitAnswers(@RequestParam("exam_id") int exam_id,
