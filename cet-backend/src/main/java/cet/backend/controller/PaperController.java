@@ -1,14 +1,16 @@
 package cet.backend.controller;
 
-import cet.backend.entity.ExamRelated.PaperInfo;
-import cet.backend.entity.ExamRelated.choiceQuestion;
+import cet.backend.entity.ExamRelated.*;
 import cet.backend.entity.RestBean;
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.listener.Topic;
 import org.springframework.web.bind.annotation.*;
 import cet.backend.service.impl.PaperHandleServiceImpl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 
 @RestController
@@ -57,9 +59,6 @@ public class PaperController {
         if(choices.size()!=10){
             return RestBean.failure(400,"创建试卷失败");
         }
-        PaperInfo paperInfo = new PaperInfo(choices.get(0), choiceW1, choices.get(1), choiceW2, choices.get(2), choiceW3, choices.get(3),
-                choiceW4, choices.get(4), choiceW5, readingQ1, readingQ2, choices.get(5), choiceW6, choices.get(6), choiceW7, choices.get(7), choiceW8, choices.get(8),
-                choiceW9, choices.get(9), choiceW10, translationQ, writingQ);
         int res = paperHandleServiceimpl.createPaper(choices.get(0), choiceW1, choices.get(1), choiceW2, choices.get(2), choiceW3, choices.get(3),
                 choiceW4, choices.get(4), choiceW5, readingQ1, readingQ2, choices.get(5), choiceW6, choices.get(6), choiceW7, choices.get(7), choiceW8, choices.get(8),
                 choiceW9, choices.get(9), choiceW10, translationQ, writingQ);
@@ -78,6 +77,25 @@ public class PaperController {
             return RestBean.success(true);
         }else {
             return RestBean.failure(400,false);
+        }
+    }
+
+    @GetMapping("/paper-list")
+    public RestBean<List<PaperInfoForGet>> getPaperIdList(){
+        List<Integer> idList = paperHandleServiceimpl.getPaperIdList();
+        ArrayList<PaperInfoForGet> paperInfo = new ArrayList<>();
+        for (Integer item : idList) {
+            paperInfo.add(new PaperInfoForGet(item));
+        }
+        return RestBean.success(paperInfo);
+    }
+
+    @PostMapping("/delete-paper")
+    public RestBean<String> deletePaper(@RequestParam("test_id") int test_id){
+        if(paperHandleServiceimpl.deletePaperInfo(test_id)){
+            return RestBean.success("删除试题成功");
+        }else {
+            return RestBean.failure(400, "删除试题失败");
         }
     }
 
@@ -108,10 +126,6 @@ public class PaperController {
                                         @RequestParam("translationQ") String translationQ,
                                         @RequestParam("writingQ") String writingQ
                                         ) {
-
-        PaperInfo paperInfo = new PaperInfo(choiceQ1, choiceW1, choiceQ2, choiceW2, choiceQ3, choiceW3, choiceQ4,
-                choiceW4, choiceQ5, choiceW5, readingQ1, readingQ2, choiceQ6, choiceW6, choiceQ7, choiceW7, choiceQ8, choiceW8, choiceQ9,
-                choiceW9, choiceQ10, choiceW10, translationQ, writingQ);
         int res = paperHandleServiceimpl.createPaper(choiceQ1, choiceW1, choiceQ2, choiceW2, choiceQ3, choiceW3, choiceQ4,
                 choiceW4, choiceQ5, choiceW5, readingQ1, readingQ2, choiceQ6, choiceW6, choiceQ7, choiceW7, choiceQ8, choiceW8, choiceQ9,
                 choiceW9, choiceQ10, choiceW10, translationQ, writingQ);

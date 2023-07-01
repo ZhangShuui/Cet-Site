@@ -7,6 +7,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -49,5 +50,15 @@ public class PaperHandleServiceImpl implements PaperHandleService {
     @Override
     public int getChoicesSize() {
         return choices.size();
+    }
+
+    @Override
+    public List<Integer> getPaperIdList() {
+        return paperMapper.getPaperIdList();
+    }
+
+    @Override
+    public boolean deletePaperInfo(int test_id) {
+        return paperMapper.deletePaperInfo(test_id)>0;
     }
 }

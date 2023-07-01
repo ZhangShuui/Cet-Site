@@ -5,6 +5,7 @@ import cet.backend.entity.ExamRelated.ExamInfo;
 import cet.backend.entity.ExamRelated.PaperInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface PaperHandleService {
     int createPaper(String choiceQ1, String choiceW1, String choiceQ2,
@@ -21,4 +22,8 @@ public interface PaperHandleService {
     void clearChoices();
 
     int getChoicesSize();
+
+    List<Integer> getPaperIdList();
+
+    boolean deletePaperInfo(int test_id);
 }
