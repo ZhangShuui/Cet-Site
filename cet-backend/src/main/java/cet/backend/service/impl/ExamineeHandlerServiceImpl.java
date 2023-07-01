@@ -3,6 +3,7 @@ package cet.backend.service.impl;
 import cet.backend.entity.ExamRelated.AnswerInfo;
 import cet.backend.entity.ExamRelated.ExamInfo;
 import cet.backend.entity.ExamRelated.PaperInfo;
+import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.mapper.ExamineeMapper;
 import cet.backend.service.ExamineeHandlerService;
 import jakarta.annotation.Resource;
@@ -76,5 +77,15 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
                 stu_choiceW6, stu_choiceW7, stu_choiceW8, stu_choiceW9,
                 stu_choiceW10, translationW, writingW);
         return res;
+    }
+
+    @Override
+    public int QueryOneExamResult(int user_id, int exam_id) {
+        return mapper.queryOneExamResult(user_id,exam_id);
+    }
+
+    @Override
+    public List<ApplyInfo> QueryExamsResults(int user_id) {
+        return mapper.queryExamsResult(user_id);
     }
 }

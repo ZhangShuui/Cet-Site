@@ -3,6 +3,7 @@ package cet.backend.mapper;
 import cet.backend.entity.ExamRelated.AnswerInfo;
 import cet.backend.entity.ExamRelated.ExamInfo;
 import cet.backend.entity.ExamRelated.PaperInfo;
+import cet.backend.entity.apply.ApplyInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -30,4 +31,8 @@ public interface ExamineeMapper {
                       String stu_choiceW8, String stu_choiceW9,
                       String stu_choiceW10, String translationW,
                       String writingW);
+    @Select("select score from soft_apply where exam_id = #{exam_id} and user_id = #{user_id}")
+    int queryOneExamResult(int user_id, int exam_id);
+    @Select("select * from soft_apply where user_id = #{user_id}")
+    List<ApplyInfo> queryExamsResult(int user_id);
 }

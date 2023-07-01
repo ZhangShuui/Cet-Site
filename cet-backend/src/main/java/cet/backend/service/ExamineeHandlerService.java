@@ -3,6 +3,9 @@ package cet.backend.service;
 import cet.backend.entity.ExamRelated.AnswerInfo;
 import cet.backend.entity.ExamRelated.ExamInfo;
 import cet.backend.entity.ExamRelated.PaperInfo;
+import cet.backend.entity.apply.ApplyInfo;
+
+import java.util.List;
 
 public interface ExamineeHandlerService {
     boolean AmIVerified(int user_id, int exam_id);
@@ -20,4 +23,7 @@ public interface ExamineeHandlerService {
                       String stu_choiceW8, String stu_choiceW9,
                       String stu_choiceW10, String translationW,
                       String writingW);
+    int QueryOneExamResult(int user_id, int exam_id);
+
+    List<ApplyInfo> QueryExamsResults(int user_id);
 }

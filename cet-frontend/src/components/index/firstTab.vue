@@ -31,6 +31,10 @@ const verify = () => {
   console.log(router.currentRoute)
 }
 
+const QueryResult = () =>{
+  router.push(('index/queryresult'))
+  console.log(router.currentRoute)
+}
 
 
 </script>
@@ -107,7 +111,7 @@ const verify = () => {
                 <el-button class="button" @click="verify">进入考试</el-button>
               </el-col>
               <el-col>
-                <el-button class="button" text>详细信息</el-button>
+                <el-button class="button" @click="QueryResult">查询考试结果</el-button>
               </el-col>
             </el-row>
           </template>
