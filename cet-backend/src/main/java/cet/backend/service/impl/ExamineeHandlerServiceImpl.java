@@ -53,11 +53,10 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
         List<ExamInfo> exams = mapper.GetAllExams();
         Date currentTime = new Date();
         Timestamp curr_time = new Timestamp(currentTime.getTime());
-        for(int i = 0; i < exams.size(); i ++) {
-            ExamInfo exam = exams.get(i);
+        for (ExamInfo exam : exams) {
             long diffInMilli = curr_time.getTime() - exam.getStart_time().getTime();
             long diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(diffInMilli);
-            if(diffInMinutes < 135 && diffInMinutes >= 0) {
+            if (diffInMinutes < 135 && diffInMinutes >= 0) {
                 return exam;
             }
         }

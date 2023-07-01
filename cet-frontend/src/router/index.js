@@ -38,6 +38,16 @@ const router = createRouter({
           path: 'apply',
           name: 'stu-apply',
           component: () => import('@/components/apply/ApplyPage.vue')
+        },
+        {
+          path:'verifyme',
+          name:'verify-me',
+          component:() => import('@/components/ExamRelated/VerifyMe.vue')
+        },
+        {
+          path:'takeexam',
+          name:'take-exam',
+          component:() => import('@/components/ExamRelated/TakeExam.vue')
         }
       ]
     }, {

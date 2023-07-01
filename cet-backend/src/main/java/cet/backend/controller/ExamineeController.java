@@ -14,9 +14,11 @@ public class ExamineeController {
     @Resource
     ExamineeHandlerServiceImpl examineeHandlerService;
 
-    @PostMapping("/check-eligibility")
+    @PostMapping("/check-eligibility")//检验学生的报考信息
     public RestBean<Boolean> CheckEligibility(@RequestParam("user_id") int user_id,
                                               @RequestParam("exam_id") int exam_id) {//前端向后端发送请求,检查我是否具备本场考试资格
+        System.out.println(user_id);
+        System.out.println(exam_id);
         if(examineeHandlerService.AmIVerified(user_id,exam_id)) {
             return RestBean.success(true);
         }else {
@@ -46,7 +48,7 @@ public class ExamineeController {
         }
     }
 
-    @GetMapping("/get-act-exam")
+    @GetMapping("/get-act-exam")//在verify.vue中根据当前是否有正在进行的考试并将此考试id与学生报名信息比较
     public RestBean<ExamInfo> GetActExam() {
         ExamInfo exam = examineeHandlerService.FindActiveExam();
         if(exam != null){

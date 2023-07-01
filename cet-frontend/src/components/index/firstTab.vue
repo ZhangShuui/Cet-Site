@@ -26,7 +26,10 @@ const test = () => {
 }
 
 
-
+const verify = () => {
+  router.push(('index/verifyme'))
+  console.log(router.currentRoute)
+}
 
 
 
@@ -101,7 +104,7 @@ const test = () => {
           <template #default>
             <el-row>
               <el-col>
-                <el-button class="button" text>详细信息</el-button>
+                <el-button class="button" @click="verify">进入考试</el-button>
               </el-col>
               <el-col>
                 <el-button class="button" text>详细信息</el-button>
