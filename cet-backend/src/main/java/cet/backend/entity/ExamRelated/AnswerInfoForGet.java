@@ -7,9 +7,9 @@ public class AnswerInfoForGet {
     int exam_id;
     int user_id;
 
-    Boolean grading_status;
+    String grading_status;
 
-    public AnswerInfoForGet(int exam_id, int user_id,Boolean grading_status) {
+    public AnswerInfoForGet(int exam_id, int user_id,String grading_status) {
         this.exam_id = exam_id;
         this.user_id = user_id;
         this.grading_status = grading_status;
