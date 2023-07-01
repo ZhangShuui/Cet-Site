@@ -3,8 +3,9 @@ package cet.backend.service.impl;
 import cet.backend.mapper.PaperMapper;
 import cet.backend.service.PaperHandleService;
 import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class PaperHandleServicelmpl implements PaperHandleService {
 
     @Resource

@@ -293,7 +293,7 @@ const ShowMyAns = () => {
             <span style="font-size: 20px; font-weight: bold">Passage One</span>
           </div>
         </template>
-        <div>{{form_paper.readingQ1}}</div>
+        <div style="line-height: 20px;font-size: 17px">{{form_paper.readingQ1}}</div>
         <el-card style="margin-top: 10px" class="box-card">
           <template #header>
             <div class="card-header">
@@ -319,7 +319,7 @@ const ShowMyAns = () => {
               <span style="font-size: 15px; font-weight: bold">Question 2</span>
             </div>
           </template>
-          <div>{{form_paper.choiceQ2}}</div>
+          <div >{{form_paper.choiceQ2}}</div>
           <el-form-item style="margin-top: 5px" prop="stu_choiceW2">
             <div class="mb-2 flex items-center text-sm">
               <el-radio-group v-model="form_ans.stu_choiceW2" class="ml-4" @change="ShowMyAns">
@@ -395,7 +395,7 @@ const ShowMyAns = () => {
             <span style="font-size: 20px; font-weight: bold">Passage Two</span>
           </div>
         </template>
-        <div>{{form_paper.readingQ2}}</div>
+        <div style="line-height: 20px;font-size: 17px">{{form_paper.readingQ2}}</div>
         <el-card style="margin-top: 10px" class="box-card">
           <template #header>
             <div class="card-header">
@@ -495,11 +495,11 @@ const ShowMyAns = () => {
         <template #header>
           <div class="card-header">
             <span style="font-size: 20px; font-weight: bold">Translation</span>
-            <div>{{form_paper.translationQ}}</div>
+            <div style="line-height: 20px;font-size: 17px">{{form_paper.translationQ}}</div>
             <el-form-item style="margin-top: 5px" prop="translationW">
               <el-input
                   v-model="form_ans.translationW"
-                  :autosize="{ minRows: 0, maxRows: 20 }"
+                  :autosize="{ minRows: 10, maxRows: 20 }"
                   type="textarea"
                   placeholder="Please input"
                   @change="ShowMyAns"
@@ -513,11 +513,11 @@ const ShowMyAns = () => {
         <template #header>
           <div class="card-header">
             <span style="font-size: 20px; font-weight: bold">Writing</span>
-            <div>{{form_paper.writingQ}}</div>
-            <el-form-item style="margin-top: 5px" prop="writingW">
+            <div style="line-height: 20px;font-size: 17px">{{form_paper.writingQ}}</div>
+            <el-form-item style="margin-top: 5px;margin-left: 0" prop="writingW">
               <el-input
                   v-model="form_ans.writingW"
-                  :autosize="{ minRows: 0, maxRows: 20 }"
+                  :autosize="{ minRows: 10, maxRows: 20 }"
                   type="textarea"
                   placeholder="Please input"
                   @change="ShowMyAns"
@@ -527,9 +527,11 @@ const ShowMyAns = () => {
         </template>
       </el-card>
     </el-form>
-    <el-button style="margin-top: 10px" type="primary" @click="ShowMyAns">保存答案</el-button>
-    <el-button style="margin-top: 10px" type="primary" @click="submitAns">提交试卷</el-button>
-  </div>
+    <div align="center">
+      <el-button style="margin-top: 10px" type="primary" @click="ShowMyAns">保存答案</el-button>
+      <el-button style="margin-top: 10px" type="primary" @click="submitAns">提交试卷</el-button>
+    </div>
+    </div>
 </template>
 
 

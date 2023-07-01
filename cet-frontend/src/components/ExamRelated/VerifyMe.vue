@@ -86,8 +86,10 @@ const VerifyMe = () => {
 <!--    </div>-->
     <div style="margin-top: 10px"></div>
 <!--    怎么让这两个按钮居中？？？-->
-    <el-button style="background-color: deepskyblue;color: white" @click="GoBack">返回首页</el-button>
-    <el-button style="background-color: deepskyblue;color: white" @click="VerifyMe">进入考试</el-button>
+    <div align="center">
+      <el-button style="background-color: deepskyblue;color: white" @click="GoBack">返回首页</el-button>
+      <el-button style="background-color: deepskyblue;color: white" @click="VerifyMe">进入考试</el-button>
+    </div>
 
 
   </el-card>
