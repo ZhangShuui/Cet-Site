@@ -4,7 +4,7 @@ import {Avatar, EditPen, Menu, Document} from "@element-plus/icons-vue";
 import router from "@/router";
 
 const handleSelectPaper = () => {
-  router.push('/teacher/index/createPaper');
+  router.push('/teacher/index/paperList');
   console.log(router.currentRoute);
 }
 
