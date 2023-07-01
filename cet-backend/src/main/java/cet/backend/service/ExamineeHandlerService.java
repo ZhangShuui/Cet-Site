@@ -1,9 +1,6 @@
 package cet.backend.service;
 
-import cet.backend.entity.ExamRelated.AnswerInfo;
-import cet.backend.entity.ExamRelated.ExamInfo;
-import cet.backend.entity.ExamRelated.PaperInfo;
-import cet.backend.entity.ExamRelated.ResultInfo;
+import cet.backend.entity.ExamRelated.*;
 import cet.backend.entity.apply.ApplyInfo;
 
 import java.util.List;
@@ -28,5 +25,7 @@ public interface ExamineeHandlerService {
 
     List<ResultInfo> QueryExamsResults(int user_id);
 
-    List<AnswerInfo> getAllAnswerInfo();
+    List<AnswerInfoForGet> getAllAnswerInfo();
+
+    AnswerInfo getCurrentAnswer(int exam_id,int user_id);
 }

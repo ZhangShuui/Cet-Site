@@ -1,9 +1,6 @@
 package cet.backend.service.impl;
 
-import cet.backend.entity.ExamRelated.AnswerInfo;
-import cet.backend.entity.ExamRelated.ExamInfo;
-import cet.backend.entity.ExamRelated.PaperInfo;
-import cet.backend.entity.ExamRelated.ResultInfo;
+import cet.backend.entity.ExamRelated.*;
 import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.mapper.ExamineeMapper;
 import cet.backend.service.ExamineeHandlerService;
@@ -91,7 +88,12 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
     }
 
     @Override
-    public List<AnswerInfo> getAllAnswerInfo() {
+    public List<AnswerInfoForGet> getAllAnswerInfo() {
         return mapper.getAllAnswerInfo();
+    }
+
+    @Override
+    public AnswerInfo getCurrentAnswer(int exam_id,int user_id){
+        return mapper.getAnswerInfo(exam_id,user_id);
     }
 }

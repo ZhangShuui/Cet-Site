@@ -10,14 +10,10 @@
       <el-table-column prop="user_id" label="考生编号" />
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
-          <el-button link type="primary" @click="clickPreview(scope.$index)">开始阅卷</el-button>
+          <el-button link type="primary" @click="clickGrading(scope.$index)">开始阅卷</el-button>
         </template>
       </el-table-column>
     </el-table>
-  </div>
-
-  <div style="margin-top: 50px" align="center">
-    <el-button type="primary" @click="onAddPaper">添加试卷</el-button>
   </div>
 
 </template>
@@ -37,16 +33,17 @@ const answerForm = reactive({
   list: []
 })
 
-const paperInfo = reactive({
-  test_id: -1,
+const answerInfo = reactive({
+  exam_id: -1,
+  user_id: -1,
 })
 
 const refreshData = () => {
-  get("/api/paper/paper-list", (message)=>{
+  get("/api/examinee/answer-list", (message)=>{
     answerForm.list = []
     answerForm.list.push(...message);
     console.log(answerForm)
-    router.push("/teacher/index/paperList");
+    router.push("/teacher/index/answerList");
   }, (message) => {
     console.log(message);
   })
@@ -57,39 +54,25 @@ onMounted(() => {
 })
 
 
-const clickPreview = (scope) => {
-  paperInfo.test_id = answerForm.list[scope].test_id;
-  if (paperInfo.test_id === -1){
-    ElMessage.warning("请选择试题")
+const clickGrading = (scope) => {
+  answerInfo.exam_id = answerForm.list[scope].exam_id;
+  answerInfo.user_id = answerForm.list[scope].user_id;
+  if (answerInfo.exam_id === -1 || answerInfo.user_id === -1){
+    ElMessage.warning("请选择答卷")
   } else {
-    post('/api/paper/set-preview-id',{
-      test_id: paperInfo.test_id
+    post('/api/examinee/set-answer-id',{
+      exam_id: answerInfo.exam_id,
+      user_id: answerInfo.user_id
     },()=>{
-      // router
+      post('api/examinee/auto-grading',{
+        exam_id: answerInfo.exam_id,
+        user_id: answerInfo.user_id
+      },()=>{
+        router.push("/teacher/index/gradePaper")
+      })
     })
   }
 
-}
-
-const clickDelete = (scope) =>{
-  paperInfo.test_id = answerForm.list[scope].test_id;
-  if (paperInfo.test_id === -1){
-    ElMessage.warning("请选择试题")
-  } else {
-    post('/api/paper/delete-paper',{
-      test_id: paperInfo.test_id
-    },(message)=>{
-      ElMessage.success(message);
-      refreshData();
-    },(message)=>{
-      ElMessage.error(message);
-      refreshData();
-    })
-  }
-}
-
-const onAddPaper =()=>{
-  router.push("/teacher/index/createPaper");
 }
 
 </script>
