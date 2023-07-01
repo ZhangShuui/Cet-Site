@@ -107,4 +107,9 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
         int test_id = mapper.getTestId(exam_id,user_id);
         return mapper.getChoiceAnswers(test_id);
     }
+
+    @Override
+    public int updateScore(int score, int exam_id, int user_id) {
+        return mapper.updateScore(score,exam_id,user_id);
+    }
 }

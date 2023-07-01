@@ -1,5 +1,8 @@
 package cet.backend.entity.ExamRelated;
 
+import lombok.Data;
+
+@Data
 public class ChoiceAnswers {
     String choiceW1;
     String choiceW2;
@@ -24,4 +27,6 @@ public class ChoiceAnswers {
         this.choiceW9 = choiceW9;
         this.choiceW10 = choiceW10;
     }
+
+
 }

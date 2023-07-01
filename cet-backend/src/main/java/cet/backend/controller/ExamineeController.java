@@ -133,8 +133,42 @@ public class ExamineeController {
                                          @RequestParam("user_id") int user_id ){
         current_answer = examineeHandlerService.getCurrentAnswer(exam_id,user_id);
         ChoiceAnswers choiceAnswers = examineeHandlerService.getChoiceAnswers(exam_id,user_id);
-
-        return RestBean.success(true);
+        int score =0;
+        if(current_answer.getStu_choiceW1().equals(choiceAnswers.getChoiceW1())){
+            score +=5;
+        }
+        if(current_answer.getStu_choiceW2().equals(choiceAnswers.getChoiceW2())){
+            score+=5;
+        }
+        if(current_answer.getStu_choiceW3().equals(choiceAnswers.getChoiceW3())){
+            score+=5;
+        }
+        if(current_answer.getStu_choiceW4().equals(choiceAnswers.getChoiceW4())){
+            score+=5;
+        }
+        if(current_answer.getStu_choiceW5().equals(choiceAnswers.getChoiceW5())){
+            score+=5;
+        }
+        if(current_answer.getStu_choiceW6().equals(choiceAnswers.getChoiceW6())){
+            score+=5;
+        }
+        if(current_answer.getStu_choiceW7().equals(choiceAnswers.getChoiceW7())){
+            score+=5;
+        }
+        if (current_answer.getStu_choiceW8().equals(choiceAnswers.getChoiceW8())){
+            score+=5;
+        }
+        if(current_answer.getStu_choiceW9().equals(choiceAnswers.getChoiceW9())){
+            score+=5;
+        }
+        if(current_answer.getStu_choiceW10().equals(choiceAnswers.getChoiceW10())){
+            score+=5;
+        }
+        if(examineeHandlerService.updateScore(score,exam_id,user_id)>0){
+            return RestBean.success(true);
+        }else{
+            return RestBean.failure(400,false);
+        }
     }
 
     public int grade_exam_id=-1;

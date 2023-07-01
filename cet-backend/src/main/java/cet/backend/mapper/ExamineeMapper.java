@@ -5,6 +5,7 @@ import cet.backend.entity.apply.ApplyInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -40,9 +41,12 @@ public interface ExamineeMapper {
     @Select("select * from soft_answer where exam_id = #{exam_id} and user_id = #{user_id}")
     AnswerInfo getAnswerInfo(int exam_id, int user_id);
 
-    @Select("select test_id from soft_examinfo where exam_id = #{exam_id} and user_id = #{user_id}")
+    @Select("select test_id from soft_apply where exam_id = #{exam_id} and user_id = #{user_id}")
     int getTestId(int exam_id, int user_id);
 
     @Select("select choiceW1,choiceW2,choiceW3,choiceW4,choiceW5,choiceW6,choiceW7,choiceW8,choiceW9,choiceW10 from soft_paper where test_id = #{test_id}")
     ChoiceAnswers getChoiceAnswers(int test_id);
+
+    @Update("update soft_apply set score=#{score} where exam_id=#{exam_id} and user_id=#{user_id}")
+    int updateScore(int score,int exam_id,int user_id);
 }

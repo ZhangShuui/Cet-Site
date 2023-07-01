@@ -68,7 +68,10 @@ const clickGrading = (scope) => {
         exam_id: answerInfo.exam_id,
         user_id: answerInfo.user_id
       },()=>{
+        ElMessage.success("已完成客观题自动阅卷");
         router.push("/teacher/index/gradePaper")
+      },()=>{
+        ElMessage.error("自动阅卷失败");
       })
     })
   }
