@@ -53,4 +53,9 @@ public class ExamInfoHandleServiceImpl implements ExamInfoHandleService {
     public List<ExamInfo> getExamInfoCanQuit(int user_id) {
         return mapper.getAllExamTaken(user_id);
     }
+
+    @Override
+    public Timestamp getExamStartTime(int exam_id) {
+        return mapper.getStartTime(exam_id);
+    }
 }

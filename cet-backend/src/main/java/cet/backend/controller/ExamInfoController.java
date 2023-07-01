@@ -61,4 +61,9 @@ public class ExamInfoController {
         return RestBean.success(
                 convertQuit(service.getExamInfoCanQuit(user_id), user_id));
     }
+
+    @PostMapping("/test/getStartTime")
+    RestBean<Timestamp> getExamStartTime(@RequestParam("exam_id") int exam_id) {
+        return RestBean.success(service.getExamStartTime(exam_id));
+    }
 }
