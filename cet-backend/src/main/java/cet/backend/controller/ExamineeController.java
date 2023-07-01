@@ -7,6 +7,7 @@ import cet.backend.service.impl.ExamineeHandlerServiceImpl;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -120,10 +121,40 @@ public class ExamineeController {
         }
     }
 
+    @GetMapping("/answer-list")
+    public RestBean<List<AnswerInfoForGet>> getAnswerInfoList(){
+        return RestBean.success(examineeHandlerService.getAllAnswerInfo());
+    }
+
+    public AnswerInfo current_answer;
+
     @PostMapping("auto-grading")
     public RestBean<Boolean> autoGrading(@RequestParam("exam_id") int exam_id,
                                          @RequestParam("user_id") int user_id ){
-        return null;
+        current_answer = examineeHandlerService.getCurrentAnswer(exam_id,user_id);
+
+        return RestBean.success(true);
+    }
+
+    public int grade_exam_id=-1;
+    public int grade_user_id=-1;
+
+    @PostMapping("/set-answer-id")
+    public RestBean<Boolean> setAnswerId(@RequestParam("exam_id") int exam_id,
+                                         @RequestParam("user_id") int user_id){
+        grade_exam_id = exam_id;
+        grade_user_id = user_id;
+        if(grade_user_id>0 && grade_exam_id>0) {
+            return RestBean.success(true);
+        }else {
+            return RestBean.failure(400,false);
+        }
+    }
+
+    @GetMapping("/get-answer-id")
+    public RestBean<AnswerInfoForGet> getAnswerId(){
+        AnswerInfoForGet answerId = new AnswerInfoForGet(grade_exam_id,grade_user_id);
+        return RestBean.success(answerId);
     }
 
 }

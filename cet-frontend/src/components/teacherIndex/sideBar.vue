@@ -4,7 +4,7 @@ import {Avatar, EditPen, Menu, Document} from "@element-plus/icons-vue";
 import router from "@/router";
 
 const handleSelectGrading = () => {
-  router.push('/teacher/index/gradePaper');
+  router.push('/teacher/index/answerList');
   console.log(router.currentRoute);
 }
 
