@@ -171,6 +171,11 @@ public class ExamineeController {
         }
     }
 
+    @GetMapping("/getCurrentAns")
+    public RestBean<AnswerInfo> getAnsByUserExam() {
+        return RestBean.success(current_answer);
+    }
+
     public int grade_exam_id=-1;
     public int grade_user_id=-1;
 
@@ -196,5 +201,7 @@ public class ExamineeController {
         AnswerInfoForGet answerId = new AnswerInfoForGet(grade_exam_id,grade_user_id,current_grading_status);
         return RestBean.success(answerId);
     }
+
+
 
 }
