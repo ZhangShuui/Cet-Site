@@ -3,6 +3,7 @@ package cet.backend.service.impl;
 import cet.backend.entity.ExamRelated.AnswerInfo;
 import cet.backend.entity.ExamRelated.ExamInfo;
 import cet.backend.entity.ExamRelated.PaperInfo;
+import cet.backend.entity.ExamRelated.ResultInfo;
 import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.mapper.ExamineeMapper;
 import cet.backend.service.ExamineeHandlerService;
@@ -85,7 +86,7 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
     }
 
     @Override
-    public List<ApplyInfo> QueryExamsResults(int user_id) {
+    public List<ResultInfo> QueryExamsResults(int user_id) {
         return mapper.queryExamsResult(user_id);
     }
 }

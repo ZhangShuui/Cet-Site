@@ -1,9 +1,6 @@
 package cet.backend.controller;
 
-import cet.backend.entity.ExamRelated.AnswerInfo;
-import cet.backend.entity.ExamRelated.ExamInfo;
-import cet.backend.entity.ExamRelated.PaperInfo;
-import cet.backend.entity.ExamRelated.SplitedPaper;
+import cet.backend.entity.ExamRelated.*;
 import cet.backend.entity.RestBean;
 import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.service.impl.ExamineeHandlerServiceImpl;
@@ -83,8 +80,8 @@ public class ExamineeController {
     }
 
     @PostMapping("/query-results")
-    public RestBean<List<ApplyInfo>> QueryExamResult(@RequestParam("user_id") int user_id) {
-        List<ApplyInfo> res = examineeHandlerService.QueryExamsResults(user_id);
+    public RestBean<List<ResultInfo>> QueryExamResult(@RequestParam("user_id") int user_id) {
+        List<ResultInfo> res = examineeHandlerService.QueryExamsResults(user_id);
         if(res.size() > 0) {
             return RestBean.success(res);
         } else {
