@@ -63,7 +63,7 @@ public class ApplyInfoController {
             return RestBean.failure(400, "取消考试失败");
     }
 
-    @PostMapping()
+    @PostMapping("/update-apply-info")
     public RestBean<String> updateApplyInfo(@RequestParam("exam_id") int exam_id,
                                             @RequestParam("user_id") int user_id,
                                             @RequestParam("payment_status") String payment_status,
@@ -76,4 +76,7 @@ public class ApplyInfoController {
             return RestBean.failure(400, "修改考试信息失败");
 
     }
+
+
+
 }
