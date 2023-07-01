@@ -66,6 +66,10 @@ const router = createRouter({
           path: 'cetTestInfo',
           name: 'cet-test-info',
           component:() => import('@/components/index/cetTestInfo.vue')
+        },{
+          path: 'signUpForTestInfo',
+          name: 'sign-up-for-test-info',
+          component: () => import('@/components/index/signUpForTestInfo.vue')
         }
       ]
     },

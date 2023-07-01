@@ -61,7 +61,7 @@ const QueryResult = () =>{
             <div class="card-header">
               <el-icon><Bell/></el-icon>
               <el-text style="margin-right: auto">项目简介</el-text>
-              <el-button class="button" @click="router.push('index/projectInstruction')" text>详细信息</el-button>
+              <el-button type="primary" @click="router.push('index/projectInstruction')" plain>详细信息</el-button>
             </div>
           </template>
           <el-text>
@@ -75,7 +75,7 @@ const QueryResult = () =>{
             <div class="card-header">
               <el-icon><EditPen /></el-icon>
               <el-text style="margin-right: auto">考试报名</el-text>
-              <el-button class="button" @click="test" shadow="shadow">详细信息</el-button>
+              <el-button type="primary" @click="router.push('index/signUpForTestInfo')" shadow="shadow" plain>详细信息</el-button>
             </div>
           </template>
           <el-text>
@@ -89,7 +89,7 @@ const QueryResult = () =>{
             <div class="card-header">
               <el-icon><Service/></el-icon>
               <el-text style="margin-right: auto">线上考试</el-text>
-              <el-button class="button" @click="router.push('index/cetTestInfo')" text>详细信息</el-button>
+              <el-button type="primary" @click="router.push('index/cetTestInfo')" plain>详细信息</el-button>
             </div>
           </template>
           <el-text>
@@ -106,12 +106,18 @@ const QueryResult = () =>{
             </div>
           </template>
           <template #default>
-            <el-row>
-              <el-col>
-                <el-button class="button" @click="verify">进入考试</el-button>
+            <el-row gutter="20">
+              <el-col span="12">
+                <el-button type="primary" class="button" @click="verify" style="margin-bottom: 10px;width: 100px">进入考试</el-button>
               </el-col>
+
+              <el-col span="12">
+                <el-button type="success" class="button" @click="QueryResult" style="width: 100px" plain> 查询考试结果</el-button>
+              </el-col>
+            </el-row>
+            <el-row >
               <el-col>
-                <el-button class="button" @click="QueryResult">查询考试结果</el-button>
+                <el-button type="warning" class="button" @click="test" style="width: 100px" plain> 报考信息</el-button>
               </el-col>
             </el-row>
           </template>
