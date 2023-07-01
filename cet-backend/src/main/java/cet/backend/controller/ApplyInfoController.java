@@ -40,8 +40,19 @@ public class ApplyInfoController {
     }
 
     @PostMapping("/find-apply-info")
-    public RestBean<List<ApplyInfo>> findApplyInfo(@RequestParam("exam_id") int exam_id,
-                                                   @RequestParam("user_id") int user_id){
+    public RestBean<List<ApplyInfo>> findApplyInfo(@RequestParam("exam_id") String s_exam_id,
+                                                   @RequestParam("user_id") String s_user_id){
+
+        Integer exam_id;
+        Integer user_id;
+        if (s_exam_id.equals(""))
+            exam_id = -1;
+        else
+            exam_id = Integer.valueOf(s_exam_id);
+        if (s_user_id.equals(""))
+            user_id = -1;
+        else
+            user_id = Integer.valueOf(s_user_id);
 
         if (exam_id == -1 && user_id == -1){
             return RestBean.success(service.showAllApplyInfo());
@@ -67,14 +78,17 @@ public class ApplyInfoController {
     public RestBean<String> updateApplyInfo(@RequestParam("exam_id") int exam_id,
                                             @RequestParam("user_id") int user_id,
                                             @RequestParam("payment_status") String payment_status,
-                                            @RequestParam("score") int score,
                                             @RequestParam("test_id") int test_id){
-        if (service.updateTestOrPaymentStatus(exam_id, user_id, payment_status, test_id)
-                &&service.updateScore(exam_id, user_id, score))
+        if (service.updateTestOrPaymentStatus(exam_id, user_id, payment_status, test_id))
             return RestBean.success("修改考试信息成功");
         else
             return RestBean.failure(400, "修改考试信息失败");
 
+    }
+
+    @GetMapping("/all-apply-info")
+    public RestBean<List<ApplyInfo>> getAllApplyInfo(){
+        return RestBean.success(service.showAllApplyInfo());
     }
 
 

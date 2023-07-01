@@ -60,6 +60,11 @@ const router = createRouter({
           path: 'createPaper',
           name: 'create-paper',
           component: () => import('@/components/paperCreate/createPaper.vue')
+        },
+        {
+          path: 'applyInfo',
+          name: 'apply-info',
+          component: () => import('@/components/apply/ApplyInfoShow.vue')
         }
       ]
     }

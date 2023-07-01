@@ -25,7 +25,7 @@ public interface ApplyInfoMapper {
     @Select("select * from soft_apply")
     List<ApplyInfo> findAllApplyInfo();
 
-    @Update("update soft_apply set payment_status=#{payment_status}, set score=#{score}, set test_id=#{test_id} where exam_id=#{exam_id} and user_id=#{user_id}")
+    @Update("update soft_apply set payment_status=#{payment_status}, score=#{score}, test_id=#{test_id} where exam_id=#{exam_id} and user_id=#{user_id}")
     int updateApplyInfo(int exam_id, int user_id, String payment_status, int score, int test_id);
 
     @Update("update soft_apply set payment_status=#{payment_status} where exam_id=#{exam_id} and user_id=#{user_id}")
