@@ -37,11 +37,11 @@
         <el-aside width="200px" style="height: 100%; background-color: #475669">
           <SideBar/>
         </el-aside>
+
         <el-container style="background-color: white">
           <el-main>
-            <div>
-              欢迎进入到学习平台
-            </div>
+            <router-view>
+            </router-view>
           </el-main>
           <el-footer>
             <el-affix position="bottom" offset="10px">

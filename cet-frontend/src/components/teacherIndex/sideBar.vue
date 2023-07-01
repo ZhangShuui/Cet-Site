@@ -1,6 +1,13 @@
 <script setup>
 
-import {Avatar, EditPen, Menu} from "@element-plus/icons-vue";
+import {Avatar, EditPen, Menu, Document} from "@element-plus/icons-vue";
+import router from "@/router";
+
+const handleSelectPaper = () => {
+  router.push('/teacher/index/createPaper');
+  console.log(router.currentRoute);
+}
+
 </script>
 
 <template>
@@ -8,7 +15,6 @@ import {Avatar, EditPen, Menu} from "@element-plus/icons-vue";
       active-text-color="#ffd04b"
       background-color= "#475669"
       class="el-menu-vertical-demo"
-      default-active="1"
       text-color="#fff"
       style="width: 201px"
   >
@@ -36,6 +42,10 @@ import {Avatar, EditPen, Menu} from "@element-plus/icons-vue";
     <el-menu-item index="3">
       <el-icon><Menu /></el-icon>
       <span>考试阅卷系统</span>
+    </el-menu-item>
+    <el-menu-item index="paper" @click="handleSelectPaper">
+      <el-icon><Document /></el-icon>
+      <span>考试试题管理</span>
     </el-menu-item>
   </el-menu>
 </template>

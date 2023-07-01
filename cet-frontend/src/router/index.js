@@ -50,17 +50,18 @@ const router = createRouter({
           component:() => import('@/components/ExamRelated/TakeExam.vue')
         }
       ]
-    }, {
+    },
+    {
       path: '/teacher/index',
-      name: 'teacher-index',
+      name: "teacher-index",
       component: () => import('@/views/TeacherIndexView.vue'),
-      // children: [
-      //   {
-      //     path: 'sidebar',
-      //     name: 'index-sidebar',
-      //     component: () => import('@/components/teacherIndex/sideBar.vue')
-      //   }
-      // ]
+      children:[
+        {
+          path: 'createPaper',
+          name: 'create-paper',
+          component: () => import('@/components/paperCreate/createPaper.vue')
+        }
+      ]
     }
   ]
 })
