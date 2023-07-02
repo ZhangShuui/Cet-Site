@@ -13,16 +13,10 @@ const handleSelectPaper = () => {
   console.log(router.currentRoute);
 }
 
-const handleSelectAddExam = () => {
-  router.push('/teacher/index/addExam');
-  console.log(router.currentRoute);
-}
-
 const handleSelectExamInfo = () => {
   router.push('/teacher/index/examList');
   console.log(router.currentRoute);
 }
-
 
 const handleSelectApplyInfo = () => {
   router.push('/teacher/index/applyInfo')
@@ -56,16 +50,10 @@ const handleSelectApplyInfo = () => {
         <el-menu-item index="1-1" @click="handleSelectApplyInfo">学生报考信息</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
-    <el-sub-menu index="2">
-      <template #title>
-        <el-icon><EditPen/></el-icon>
-        <span>考试安排信息</span>
-      </template>
-      <el-menu-item-group title="CET-6">
-        <el-menu-item index="2-1" @click="handleSelectExamInfo">考试信息总览</el-menu-item>
-        <el-menu-item index="2-2" @click="handleSelectAddExam">安排考试</el-menu-item>
-      </el-menu-item-group>
-    </el-sub-menu>
+    <el-menu-item index="examInfo" @click="handleSelectExamInfo">
+      <el-icon><EditPen/></el-icon>
+      <span>考试安排信息</span>
+    </el-menu-item>
     <el-menu-item index="gradingPapers" @click="handleSelectGrading">
       <el-icon><Menu /></el-icon>
       <span>考试阅卷系统</span>
