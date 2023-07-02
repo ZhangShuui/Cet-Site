@@ -102,9 +102,9 @@ const router = createRouter({
           name: 'show-paper',
           component:()=>import('@/components/paperCreate/showPaper.vue')
         }, {
-          path: 'addExam',
-          name: 'add-exam',
-          component: () => import('@/components/examInfo/addExam.vue')
+          path: '',
+          name: 'login-page',
+          component: () => import('@/components/teacherIndex/loginPage.vue')
         }, {
           path: 'examList',
           name: 'exam-list',

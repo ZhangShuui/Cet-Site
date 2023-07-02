@@ -15,4 +15,6 @@ public interface ExamInfoHandleService {
     Timestamp getExamStartTime(int exam_id);
 
     boolean addExamInfo(int test_id, Timestamp start_time);
+
+    int deleteExamInfo(int exam_id);
 }

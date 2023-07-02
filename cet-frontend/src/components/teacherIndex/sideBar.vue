@@ -1,6 +1,6 @@
 <script setup>
 
-import {Avatar, EditPen, Menu, Document} from "@element-plus/icons-vue";
+import {Avatar, EditPen, Menu, Document, Refresh} from "@element-plus/icons-vue";
 import router from "@/router";
 
 const handleSelectGrading = () => {
@@ -15,6 +15,11 @@ const handleSelectPaper = () => {
 
 const handleSelectExamInfo = () => {
   router.push('/teacher/index/examList');
+  console.log(router.currentRoute);
+}
+
+const handleSelectLogin = () =>{
+  router.push('/teacher/index/');
   console.log(router.currentRoute);
 }
 
@@ -61,6 +66,10 @@ const handleSelectApplyInfo = () => {
     <el-menu-item index="paper" @click="handleSelectPaper">
       <el-icon><Document /></el-icon>
       <span>考试试题管理</span>
+    </el-menu-item>
+    <el-menu-item index="login" @click="handleSelectLogin">
+      <el-icon><Refresh /></el-icon>
+      <span>返回首页</span>
     </el-menu-item>
   </el-menu>
 </template>

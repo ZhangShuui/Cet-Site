@@ -65,4 +65,9 @@ public class ExamInfoHandleServiceImpl implements ExamInfoHandleService {
         else
             return false;
     }
+
+    @Override
+    public int deleteExamInfo(int exam_id) {
+        return mapper.deleteExamInfo(exam_id);
+    }
 }

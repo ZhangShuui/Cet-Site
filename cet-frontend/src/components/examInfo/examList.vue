@@ -125,24 +125,17 @@ const clickDelete = (scope) => {
   examInfo.test_id = examForm.list[scope].test_id;
   if (examInfo.exam_id === -1 || examInfo.test_id === -1){
     ElMessage.warning("请选择考试")
-  } else{
-    post('/api/examinee/set-answer-id',{
-      exam_id: answerInfo.exam_id,
-      user_id: answerInfo.user_id,
-      grading_status: answerInfo.grading_status
+  } else {
+    post('/api/examinfo/delete-exam',{
+      exam_id: examInfo.exam_id,
     },()=>{
-      post('api/examinee/auto-grading',{
-        exam_id: answerInfo.exam_id,
-        user_id: answerInfo.user_id
-      },()=>{
-        ElMessage.success("已完成客观题自动阅卷");
-        router.push("/teacher/index/gradePaper")
-      },()=>{
-        ElMessage.error("自动阅卷失败");
-      })
+      ElMessage.success("删除考试信息成功");
+      refreshData();
+    },()=>{
+      ElMessage.error("删除考试失败");
+      refreshData();
     })
   }
-
 }
 
 const submitAdd = () => {
