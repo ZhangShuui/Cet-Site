@@ -1,6 +1,6 @@
 <script setup>
 
-import {Avatar, EditPen, Menu, Document} from "@element-plus/icons-vue";
+import {Avatar, EditPen, Menu, Document, Refresh} from "@element-plus/icons-vue";
 import router from "@/router";
 
 const handleSelectGrading = () => {
@@ -18,6 +18,11 @@ const handleSelectExamInfo = () => {
   console.log(router.currentRoute);
 }
 
+const handleSelectLogin = () =>{
+  router.push('/teacher/index/');
+  console.log(router.currentRoute);
+}
+
 const handleSelectApplyInfo = () => {
   router.push('/teacher/index/applyInfo')
   console.log(router.currentRoute);
@@ -28,7 +33,7 @@ const handleSelectApplyInfo = () => {
 <template>
   <el-container direction="horizontal" style="height: 40px; background-color: #475669">
     <img src="../../figs/cetlogo.png"
-         style="width: 20px; height: 20px; margin-left: 2px;margin-top: 15px;margin-right: 10px" alt="sss"/>
+         style="width: 20px; height: 20px; margin-left: 2px;margin-top: 11px;margin-right: 10px" alt="sss"/>
     <el-text style="color: white">
       教师管理系统
     </el-text>
@@ -61,6 +66,10 @@ const handleSelectApplyInfo = () => {
     <el-menu-item index="paper" @click="handleSelectPaper">
       <el-icon><Document /></el-icon>
       <span>考试试题管理</span>
+    </el-menu-item>
+    <el-menu-item index="login" @click="handleSelectLogin">
+      <el-icon><Refresh /></el-icon>
+      <span>返回首页</span>
     </el-menu-item>
   </el-menu>
 </template>
