@@ -1,7 +1,7 @@
 <template>
   <div style="margin-left: 30px">
     <el-text size="large" style="margin-bottom: 50px">
-      <el-icon size="string" style="margin-right: 5px "><Bell/></el-icon><span style="font-size: 20px;font-weight: bold">试题信息</span>
+      <el-icon size="string" style="margin-right: 6px "><Edit/></el-icon><span style="font-size: 20px;font-weight: bold">试题信息</span>
     </el-text>
     <el-table :data="paperForm.list"
               style="width: 100%; margin-top: 10px" stripe>
@@ -23,7 +23,7 @@
 
 <script setup>
 
-import {Bell, StarFilled} from "@element-plus/icons-vue";
+import {Edit} from "@element-plus/icons-vue";
 import {useStore} from "@/stores";
 import {onMounted, reactive, ref} from "vue";
 import {ElMessage} from "element-plus";

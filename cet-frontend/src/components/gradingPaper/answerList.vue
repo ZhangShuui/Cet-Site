@@ -1,7 +1,7 @@
 <template>
   <div style="margin-left: 30px">
     <el-text size="large" style="margin-bottom: 50px">
-      <el-icon size="string" style="margin-right: 5px "><Bell/></el-icon><span style="font-size: 20px;font-weight: bold">答卷信息</span>
+      <el-icon size="string" style="margin-right: 6px "><DocumentChecked /></el-icon><span style="font-size: 20px;font-weight: bold">答卷信息</span>
     </el-text>
 
     <el-table :data="answerForm.list"
@@ -11,7 +11,7 @@
       <el-table-column prop="grading_status" label="是否完成阅卷" />
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
-          <el-button type="primary" size="small" @click="clickGrading(scope.$index)" round>开始阅卷</el-button>
+          <el-button type="primary" size="small" @click="clickGrading(scope.$index)" round :disabled="scope.row.grading_status ==='已完成' ">开始阅卷</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -21,7 +21,7 @@
 
 <script setup>
 
-import {Bell, StarFilled} from "@element-plus/icons-vue";
+import {DocumentChecked} from "@element-plus/icons-vue";
 import {useStore} from "@/stores";
 import {onMounted, reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
