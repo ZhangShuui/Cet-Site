@@ -21,6 +21,38 @@
     <el-button type="primary" @click="onAddExam">添加考试</el-button>
   </div>
 
+  <el-dialog v-model="dialogFormVisible" title="Shipping address">
+    <el-form :model="addExamForm">
+      <el-form-item label="请选择考试开始日期">
+        <el-calendar v-model="addExamForm.start_time">
+          <template #date-cell="{ data }">
+            <p :class="data.isSelected ? 'is-selected' : ''">
+              {{ data.day.split('-').slice(1).join('-') }}
+              {{ data.isSelected ? '✔️' : '' }}
+            </p>
+          </template>
+        </el-calendar>
+      </el-form-item>
+      <el-form-item label="请选择试题编号">
+        <el-select v-model="addExamForm.test_id" placeholder="Please select a zone">
+          <el-option
+              v-for="item in testIdOption.list"
+              :key="item.test_id"
+              :value="item.test_id"
+          />
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="submitAdd">
+          Confirm
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
+
 </template>
 
 <script setup>
@@ -31,10 +63,26 @@ import {onMounted, reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
 import {get, post} from "@/net";
 import router from "@/router";
+import {formattedDate} from '@/format'
+
+const dialogFormVisible = ref(false);
+
+const addExamForm = reactive({
+  start_time: "",
+  test_id: null
+})
+
+
+
+
 
 const store = useStore();
 
 const examForm = reactive({
+  list: []
+})
+
+const testIdOption = reactive({
   list: []
 })
 
@@ -46,11 +94,24 @@ const examInfo = reactive({
 const refreshData = () => {
   get("/api/examinfo/exam-list", (message)=>{
     examForm.list = []
+    for (let i in message){
+      message[i].start_time = formattedDate(message[i].start_time)
+    }
     examForm.list.push(...message);
     console.log(examForm)
     router.push("/teacher/index/examList");
   }, (message) => {
     console.log(message);
+  })
+}
+
+const getOption = () => {
+  get("api/paper/paper-list", (message) => {
+    testIdOption.list = []
+    console.log("sdsdasd")
+    console.log(message)
+    testIdOption.list.push(...message)
+    console.log(testIdOption.list)
   })
 }
 
@@ -82,6 +143,29 @@ const clickDelete = (scope) => {
     })
   }
 
+}
+
+const submitAdd = () => {
+  console.log(addExamForm)
+  if (addExamForm.test_id === null || addExamForm.start_time === ""){
+    ElMessage.warning("请填写正确考试信息再添加考试")
+  }else {
+    post("api/examinfo/add-exam-info",{
+      start_time: addExamForm.start_time,
+      test_id: addExamForm.test_id
+    }, (message)=>{
+      ElMessage.success(message)
+      refreshData()
+      dialogFormVisible.value = false;
+    }, (message) => {
+      ElMessage.warning(message)
+    })
+  }
+}
+
+const onAddExam = () => {
+  getOption()
+  dialogFormVisible.value = true;
 }
 
 </script>
@@ -121,6 +205,10 @@ const clickDelete = (scope) => {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.is-selected {
+  color: #1989fa;
 }
 
 .el-carousel__item h3 {

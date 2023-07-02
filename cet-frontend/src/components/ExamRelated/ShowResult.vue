@@ -5,6 +5,7 @@ import {post} from "@/net";
 import router from "@/router";
 import {useStore} from "@/stores";
 import {ElMessage} from "element-plus";
+import {formattedDate} from "@/format";
 
 const store = useStore()
 
@@ -31,6 +32,8 @@ onMounted(()=> {
       if (message[i].score === -1){
         message[i].score = "未评分"
       }
+      message[i].start_time = formattedDate(message[i].start_time)
+      message[i].application_time = formattedDate(Date.parse(message[i].application_time))
     }
     examResult.list.push(...message)
 

@@ -7,10 +7,13 @@ import cet.backend.entity.RestBean;
 import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.mapper.ApplyInfoMapper;
 import cet.backend.service.impl.ExamInfoHandleServiceImpl;
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @RestController
@@ -70,5 +73,21 @@ public class ExamInfoController {
     @GetMapping("/exam-list")
     RestBean<List<ExamInfo>> getAllExamInfo(){
         return RestBean.success(service.getAllExamInfo());
+    }
+
+
+    @PostMapping("/add-exam-info")
+    RestBean<String> addExamInfo(@RequestParam("start_time") String start_time_s,
+                                 @RequestParam("test_id") int test_id){
+
+        java.time.format.DateTimeFormatter dtf2 = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        LocalDateTime localDateTime = LocalDateTime.parse(start_time_s, dtf2);
+        Timestamp start_time = Timestamp.valueOf(localDateTime);
+
+        if (service.addExamInfo(test_id, start_time))
+            return RestBean.success("成功添加考试信息");
+        else
+            return RestBean.failure(400, "添加考试信息失败");
+
     }
 }

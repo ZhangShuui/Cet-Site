@@ -93,6 +93,7 @@ import {User} from "@element-plus/icons-vue";
 import {useStore} from "@/stores";
 import {get, post} from "@/net";
 import {ElMessage} from "element-plus";
+import {formattedDate} from "@/format";
 
 const store = useStore();
 
@@ -190,7 +191,11 @@ onMounted(() => {
 
 const reFreshData = () => {
   get("api/apply/all-apply-info", (message) => {
+
     applyFormInfo.list = []
+    for(let i in message){
+      message[i].application_time = formattedDate(Date.parse(message[i].application_time))
+    }
     applyFormInfo.list = message;
     console.log(applyFormInfo.list);
   }, (message) => {

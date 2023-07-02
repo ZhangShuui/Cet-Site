@@ -2,6 +2,7 @@ package cet.backend.service.impl;
 
 import cet.backend.entity.apply.ApplyInfo;
 import cet.backend.mapper.ApplyInfoMapper;
+import cet.backend.mapper.ExamMapper;
 import cet.backend.service.ApplyHandleService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ import java.util.List;
 public class ApplyHandleServiceImpl implements ApplyHandleService {
     @Resource
     ApplyInfoMapper mapper;
+
+    @Resource
+    ExamMapper examMapper;
 
     @Override
     public String addApplyInfo(int exam_id, int user_id, String payment_status, String application_time, int score, int test_id) {
@@ -27,9 +31,11 @@ public class ApplyHandleServiceImpl implements ApplyHandleService {
     @Override
     public boolean applyTestByUser(int exam_id, int user_id) {
         String time = LocalDateTime.now().toString();
-
+        int test_id = examMapper.getTestId(exam_id);
+        if (test_id == -1|| test_id == 0)
+            return false;
         if (mapper.findByExamAndUserId(exam_id, user_id).size() == 0)
-            return mapper.addApplyInfo(exam_id, user_id, "未支付", time, -1, -1) > 0;
+            return mapper.addApplyInfo(exam_id, user_id, "未支付", time, -1, test_id) > 0;
         else{
             return false;
         }

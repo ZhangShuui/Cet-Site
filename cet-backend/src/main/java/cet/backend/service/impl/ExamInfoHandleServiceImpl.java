@@ -57,4 +57,12 @@ public class ExamInfoHandleServiceImpl implements ExamInfoHandleService {
     public Timestamp getExamStartTime(int exam_id) {
         return mapper.getStartTime(exam_id);
     }
+
+    @Override
+    public boolean addExamInfo(int test_id, Timestamp start_time) {
+        if (mapper.addExamInfo(start_time, test_id) > 0)
+            return true;
+        else
+            return false;
+    }
 }

@@ -68,6 +68,7 @@ import {onMounted, reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
 import {get, post} from "@/net";
 import router from "@/router";
+import {formattedDate} from "@/format";
 
 const store = useStore();
 
@@ -100,6 +101,10 @@ const refreshData = () => {
     user_id: store.auth.user.id
   }, (message) => {
     applyForm.list = []
+    for(let i in message){
+      message[i].start_time = formattedDate(Date.parse(message[i].start_time))
+      message[i].ddl = formattedDate(Date.parse(message[i].ddl))
+    }
     applyForm.list.push(...message);
     console.log(applyForm)
     router.push("index/apply");
@@ -108,6 +113,10 @@ const refreshData = () => {
       user_id: store.auth.user.id
     }, (message) => {
       quitForm.list = []
+      for(let i in message){
+        message[i].start_time = formattedDate(Date.parse(message[i].start_time))
+        message[i].ddl = formattedDate(Date.parse(message[i].ddl))
+      }
       quitForm.list.push(...message);
       console.log(quitForm)
       router.push("index/apply");
