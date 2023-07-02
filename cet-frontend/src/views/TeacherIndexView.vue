@@ -15,9 +15,9 @@
                   </a>
                 </el-breadcrumb-item>
               </el-breadcrumb>
-              <el-menu style="height:44px; margin-left: auto">
-                <el-sub-menu style="background-color: #d3dce6">
-                  <template #title>
+              <el-menu style="margin-left: auto;--el-menu-item-height: 44px">
+                <el-sub-menu style="background-color: #d3dce6;height:44px; ">
+                  <template #title style="height: auto">
                     {{ store.auth.user.username }}老师
                   </template>
                   <el-menu-item @click="logout()" style="height: 44px; background-color: #d3dce6">

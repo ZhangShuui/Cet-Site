@@ -35,7 +35,12 @@
       </template>
     </el-table-column>
   </el-table>
-
+  <el-divider style="visibility: hidden"/>
+  <div align="center">
+    <el-button type="primary" size="large" @click="router.push('/index')">
+      返回
+    </el-button>
+  </div>
   <el-dialog
       v-model="centerDialogVisible"
       title="Warning"
