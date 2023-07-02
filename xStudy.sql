@@ -74,7 +74,7 @@ CREATE TABLE `soft_answer` (
 
 LOCK TABLES `soft_answer` WRITE;
 /*!40000 ALTER TABLE `soft_answer` DISABLE KEYS */;
-INSERT INTO `soft_answer` VALUES (1,1,'A','B','C','D','A','B','C','D','A','B','SADDA','GFDS'),(2,3,'','','','','','','','','','','','');
+INSERT INTO `soft_answer` VALUES (1,1,'A','B','C','D','A','B','C','D','A','B','SADDA','GFDS','未完成'),(2,3,'','','','','','','','','','','','','未完成');
 /*!40000 ALTER TABLE `soft_answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
