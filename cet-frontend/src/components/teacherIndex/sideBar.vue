@@ -44,8 +44,6 @@ const handleSelectApplyInfo = () => {
       </template>
       <el-menu-item-group title="CET-6">
         <el-menu-item index="2-1">总览</el-menu-item>
-        <el-menu-item index="2-2">考场具体信息</el-menu-item>
-        <el-menu-item index="2-3">我的考场安排</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
     <el-menu-item index="gradingPapers" @click="handleSelectGrading">
