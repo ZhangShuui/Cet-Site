@@ -21,6 +21,13 @@ const handleSelectApplyInfo = () => {
 </script>
 
 <template>
+  <el-container direction="horizontal" style="height: 40px; background-color: #475669">
+    <img src="../../figs/cetlogo.png"
+         style="width: 20px; height: 20px; margin-left: 2px;margin-top: 15px;margin-right: 10px" alt="sss"/>
+    <el-text style="color: white">
+      教师管理系统
+    </el-text>
+  </el-container>
   <el-menu
       active-text-color="#ffd04b"
       background-color= "#475669"
@@ -28,6 +35,7 @@ const handleSelectApplyInfo = () => {
       text-color="#fff"
       style="width: 201px"
   >
+    <el-divider style="margin-top: 5px; stroke-dashoffset: 10px" />
     <el-sub-menu index="1">
       <template #title>
         <el-icon><Avatar/></el-icon>
