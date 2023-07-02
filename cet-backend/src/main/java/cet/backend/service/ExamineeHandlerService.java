@@ -34,4 +34,6 @@ public interface ExamineeHandlerService {
     ChoiceAnswers getChoiceAnswers(int exam_id, int user_id);
 
     int updateScore(int score,int exam_id,int user_id);
+
+    int updateGradingStatus(String grading_status,int exam_id,int user_id);
 }
