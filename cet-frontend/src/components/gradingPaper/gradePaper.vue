@@ -97,7 +97,7 @@ const goback = () => {
     </el-card>
   </div>
 
-  <el-input-number v-model="num_translation" :min="1" :max="100" style="margin-left: 80px;margin-top: 10px" @change="handleChange" />
+  <el-input-number v-model="num_translation" :min="0" :max="25" style="margin-left: 80px;margin-top: 10px" @change="handleChange" />
 
   <el-divider style="visibility: hidden"/>
   <div style="font-size: 25px; font-weight: bold; margin-top: 10px;margin-left: 85px">
@@ -115,7 +115,7 @@ const goback = () => {
     </el-card>
   </div>
 
-  <el-input-number v-model="num_writing" :min="1" :max="100" style="margin-left: 80px;margin-top: 10px" @change="handleChange" />
+  <el-input-number v-model="num_writing" :min="0" :max="25" style="margin-left: 80px;margin-top: 10px" @change="handleChange" />
 
   <el-divider style="visibility: hidden"/>
 

@@ -24,9 +24,9 @@
   <el-dialog v-model="dialogFormVisible" title="添加考试信息">
     <el-form :model="addExamForm">
       <el-form-item label="请选择考试开始日期">
-        <el-calendar v-model="addExamForm.start_time">
-          <template #date-cell="{ data }">
-            <p :class="data.isSelected ? 'is-selected' : ''">
+        <el-calendar v-model="addExamForm.start_time" @click="console.log('12')">
+          <template #date-cell="{ data }" >
+            <p :class="data.isSelected ? 'is-selected' : ''" >
               {{ data.day.split('-').slice(1).join('-') }}
               {{ data.isSelected ? '✔️' : '' }}
             </p>

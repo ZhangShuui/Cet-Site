@@ -165,6 +165,9 @@ const handleSearch = () => {
     user_id: searchUserId.value
   },(message) => {
     applyFormInfo.list = []
+    for(let i in message){
+      message[i].application_time = formattedDate(Date.parse(message[i].application_time))
+    }
     applyFormInfo.list.push(...message)
     ElMessage.success("查询信息成功")
   }, (message) => {

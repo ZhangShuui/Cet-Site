@@ -81,7 +81,7 @@ public class ExamInfoController {
                                  @RequestParam("test_id") int test_id){
 
         java.time.format.DateTimeFormatter dtf2 = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-        LocalDateTime localDateTime = LocalDateTime.parse(start_time_s, dtf2);
+        LocalDateTime localDateTime = LocalDateTime.parse(start_time_s, dtf2).withMinute(0).withHour(15).withSecond(0);
         Timestamp start_time = Timestamp.valueOf(localDateTime);
 
         if (service.addExamInfo(test_id, start_time))

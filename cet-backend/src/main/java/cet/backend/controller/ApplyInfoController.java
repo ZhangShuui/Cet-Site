@@ -2,10 +2,15 @@ package cet.backend.controller;
 
 import cet.backend.entity.RestBean;
 import cet.backend.entity.apply.ApplyInfo;
+import cet.backend.mapper.ExamMapper;
 import cet.backend.service.impl.ApplyHandleServiceImpl;
 import jakarta.annotation.Resource;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 
@@ -19,6 +24,9 @@ public class ApplyInfoController {
 
     @Resource
     ApplyHandleServiceImpl service;
+
+    @Resource
+    ExamMapper examMapper;
 
     @PostMapping("/payment-submit")
     public RestBean<String> paymentSubmit(@RequestParam("exam_id") int exam_id,
@@ -88,6 +96,11 @@ public class ApplyInfoController {
     @PostMapping("/delete-apply-info")
     public RestBean<String> deleteApplyInfo(@RequestParam("exam_id") int exam_id,
                                             @RequestParam("user_id") int user_id){
+        LocalDateTime ddl = examMapper.getStartTime(exam_id).toLocalDateTime().minusDays(7);
+        LocalDateTime now = LocalDateTime.now();
+        if (!now.isBefore(ddl)){
+            return RestBean.failure(400, "退考截止日期已过");
+        }
         if (service.deleteApplyInfo(exam_id, user_id))
             return RestBean.success("取消考试成功");
         else
