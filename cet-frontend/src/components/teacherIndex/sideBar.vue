@@ -44,7 +44,7 @@ const handleSelectApplyInfo = () => {
       background-color= "#475669"
       class="el-menu-vertical-demo"
       text-color="#fff"
-      style="width: 201px"
+      style="width: 201px;"
   >
     <el-divider style="margin-top: 5px; stroke-dashoffset: 10px" />
     <el-sub-menu index="1">

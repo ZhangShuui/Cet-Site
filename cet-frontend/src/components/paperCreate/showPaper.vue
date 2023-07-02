@@ -203,7 +203,7 @@ const goback = () => {
 </script>
 
 <template>
-  <div>
+  <div style="width: 90%; margin-left: 50px">
     <el-form :model="form_ans" label-width="120px">
       <el-card style="margin-top: 10px" class="box-card">
         <template #header>

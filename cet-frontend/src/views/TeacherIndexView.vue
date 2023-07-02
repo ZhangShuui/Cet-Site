@@ -1,11 +1,11 @@
 <template>
   <div class="common-layout">
     <el-container style="height: 100vh">
-      <el-aside width="200px" style="height: 100%; background-color: #475669">
+      <el-aside width="200px" style="height: 100%; background-color: #475669;overflow: hidden">
         <SideBar/>
       </el-aside>
       <el-container style="height: auto; background-color: white">
-        <el-header height="45px" style="background-color: #606266; margin-left: 0px" >
+        <el-header height="45px" style="background-color: #606266; margin-left: 0px;padding: 0" >
           <el-container direction="horizontal" style="height:44px ;background-color: white; margin-left: 0px">
               <el-breadcrumb separator="/" class="header-breadcrumb">
                 <el-breadcrumb-item>teacher</el-breadcrumb-item>
@@ -16,7 +16,7 @@
                 </el-breadcrumb-item>
               </el-breadcrumb>
               <el-menu style="height:44px; margin-left: auto">
-                <el-sub-menu style="background-color: #d3dce6; height: 44px">
+                <el-sub-menu style="background-color: #d3dce6">
                   <template #title>
                     {{ store.auth.user.username }}老师
                   </template>

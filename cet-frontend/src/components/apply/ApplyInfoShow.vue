@@ -24,24 +24,42 @@
     </el-table-column>
   </el-table>
   <el-divider style="visibility: hidden"/>
-  <el-row align="middle">
-    <el-card style="width: 200px; margin-left: 300px;margin-right: 100px">
-      <template #header><span>查询考试信息</span></template>
-      <el-text>考试编号</el-text>
-      <el-input v-model="searchExamId" size="small" placeholder="e_id" style="margin-top: 5px;margin-bottom:10px ;margin-right: 10px;width: auto"/>
-      <el-text>用户编号</el-text>
-      <el-input v-model="searchUserId" size="small" placeholder="u_id" style="margin-top: 10px;margin-right: 10px;width: auto"/>
-      <el-button size="small" @click="handleSearch()" style="margin-top: 10px">search</el-button>
-    </el-card>
-    <el-card style="width: 200px">
-      <template #header><span>添加考试信息</span></template>
-      <el-text>考试编号</el-text>
-      <el-input v-model="addExamId" size="small" placeholder="e_id" style="margin-top: 5px;margin-bottom:10px ;margin-right: 10px;width: auto"/>
-      <el-text>用户编号</el-text>
-      <el-input v-model="addUserId" size="small" placeholder="u_id" style="margin-top: 10px;margin-right: 10px;width: auto"/>
-      <el-button size="small" @click="handleAdd()" style="margin-top: 10px">add</el-button>
-    </el-card>
-  </el-row>
+  <div align="center">
+    <el-row gutter="50">
+      <el-col span="12">
+        <el-card>
+          <template #header><span>查询考试信息</span></template>
+          <el-col>
+            <el-text style="margin-right: 5px">考试编号</el-text>
+            <el-input v-model="searchExamId" size="small" placeholder="e_id" style="width: auto" />
+          </el-col>
+          <el-col style="margin-top: 10px">
+            <el-text style="margin-right: 5px">用户编号</el-text>
+            <el-input v-model="searchUserId" size="small" placeholder="u_id" style="width: auto"/>
+          </el-col>
+
+          <el-button type="primary" size="small" @click="handleSearch()" style="margin-top: 10px;float: right;margin-bottom: 10px">search</el-button>
+        </el-card>
+      </el-col>
+      <el-col span="12">
+        <el-card>
+          <template #header><span>添加考试信息</span></template>
+          <el-col>
+            <el-text style="margin-right: 5px">考试编号</el-text>
+            <el-input v-model="addExamId" size="small" placeholder="e_id" style="width: auto"/>
+          </el-col>
+          <el-col style="margin-top: 10px">
+            <el-text style="margin-right: 5px">用户编号</el-text>
+            <el-input v-model="addUserId" size="small" placeholder="u_id" style="width: auto"/>
+          </el-col>
+
+          <el-button type="primary" size="small" @click="handleAdd()" style="margin-top: 10px;float: right;margin-bottom: 10px">add</el-button>
+        </el-card>
+      </el-col>
+    </el-row>
+  </div>
+
+
 
   <el-dialog v-model="dialogFormVisible" title="修改报考信息">
     <el-form :model="editForm">
