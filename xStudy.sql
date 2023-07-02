@@ -198,7 +198,7 @@ CREATE TABLE `soft_teacher` (
 
 LOCK TABLES `soft_teacher` WRITE;
 /*!40000 ALTER TABLE `soft_teacher` DISABLE KEYS */;
-INSERT INTO `soft_teacher` VALUES (1,'杨飓风','ABCDEF'),(2,'马宝国','BCDEFG'),(1,'杨飓风','ABCDEF'),(2,'马宝国','BCDEFG'),(1,'杨飓风','ABCDEF'),(2,'马宝国','BCDEFG');
+INSERT INTO `soft_teacher` VALUES (1,'杨飓风','ABCDEF');
 /*!40000 ALTER TABLE `soft_teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
