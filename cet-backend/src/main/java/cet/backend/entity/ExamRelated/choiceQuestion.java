@@ -28,7 +28,7 @@ public class choiceQuestion {
     }
 
     public String combineChoice(){
-        String combineRes= Topic+"\\$\\$"+OptionA+"\\$\\$"+OptionB+"\\$\\$"+OptionC+"\\$\\$"+OptionD;
+        String combineRes= Topic+"$$"+OptionA+"$$"+OptionB+"$$"+OptionC+"$$"+OptionD;
         return combineRes;
     }
 }

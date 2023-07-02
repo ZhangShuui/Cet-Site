@@ -37,6 +37,7 @@ const VerifyMe = () => {
         //在这里跳转
         router.push('/index/takeexam')
       },()=> {
+        console.log(form)
         ElMessage.error("没有检测到您具备考试资格")
       })
     },() => {
