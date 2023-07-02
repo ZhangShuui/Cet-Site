@@ -11,7 +11,7 @@
       <el-table-column prop="grading_status" label="是否完成阅卷" />
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
-          <el-button link type="primary" @click="clickGrading(scope.$index)">开始阅卷</el-button>
+          <el-button type="primary" size="small" @click="clickGrading(scope.$index)" round>开始阅卷</el-button>
         </template>
       </el-table-column>
     </el-table>
