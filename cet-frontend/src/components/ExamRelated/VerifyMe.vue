@@ -75,7 +75,7 @@ const VerifyMe = () => {
     <el-card style="margin-top: 10px" class="box-card">
       <div>姓名：{{store.auth.user.username}}</div>
       <div style="margin-top: 3px">邮箱：{{store.auth.user.email}}</div>
-      <div style="margin-top: 3px">身份证号：{{store.auth.user.id}}</div>
+      <div style="margin-top: 3px">考生编号：{{store.auth.user.id}}</div>
     </el-card>
 <!--    <div style="margin-top: 3px">-->
 <!--      <el-switch-->
