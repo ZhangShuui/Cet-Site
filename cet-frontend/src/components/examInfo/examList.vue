@@ -17,7 +17,9 @@
     </el-table>
   </div>
 
-
+  <div style="margin-top: 50px" align="center">
+    <el-button type="primary" @click="onAddExam">添加考试</el-button>
+  </div>
 
 </template>
 
