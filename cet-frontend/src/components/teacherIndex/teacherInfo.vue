@@ -4,11 +4,11 @@
       <el-icon size="string" style="margin-right: 5px "><Bell/></el-icon><span style="font-size: 20px;font-weight: bold">考试信息</span>
     </el-text>
 
-    <el-table :data="examForm.list"
+    <el-table :data="teacherForm.list"
               style="width: 200%; margin-top: 10px" >
-      <el-table-column fixed prop="exam_id" label="考试编号"  />
-      <el-table-column prop="start_time" label="考试时间" width="340px"/>
-      <el-table-column prop="test_id" label="试题编号" />
+      <el-table-column fixed prop="id" label="用户号"  />
+      <el-table-column prop="name" label="教师姓名" width="340px"/>
+      <el-table-column prop="teacher_id" label="教师编号" />
       <el-table-column fixed="right" label="操作" >
         <template v-slot="scope">
           <el-button type="danger" size="small" @click="clickDelete(scope.$index)" round >删除</el-button>
@@ -18,29 +18,16 @@
   </div>
 
   <div style="margin-top: 50px" align="center">
-    <el-button type="primary" @click="onAddExam">添加考试</el-button>
+    <el-button type="primary" @click="onAddTeacher">添加教师信息</el-button>
   </div>
 
-  <el-dialog v-model="dialogFormVisible" title="添加考试信息">
-    <el-form :model="addExamForm">
-      <el-form-item label="请选择考试开始日期">
-        <el-calendar v-model="addExamForm.start_time">
-          <template #date-cell="{ data }">
-            <p :class="data.isSelected ? 'is-selected' : ''">
-              {{ data.day.split('-').slice(1).join('-') }}
-              {{ data.isSelected ? '✔️' : '' }}
-            </p>
-          </template>
-        </el-calendar>
+  <el-dialog v-model="dialogFormVisible" title="添加教师信息">
+    <el-form :model="addteacherForm">
+      <el-form-item label="请输入教师姓名">
+        <el-input v-model="addteacherForm.name"/>
       </el-form-item>
-      <el-form-item label="请选择试题编号">
-        <el-select v-model="addExamForm.test_id" placeholder="Please select a zone">
-          <el-option
-              v-for="item in testIdOption.list"
-              :key="item.test_id"
-              :value="item.test_id"
-          />
-        </el-select>
+      <el-form-item label="请输入六位大写字母构成的教师编号">
+        <el-input v-model="addteacherForm.teacher_id" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -67,9 +54,9 @@ import {formattedDate} from '@/format'
 
 const dialogFormVisible = ref(false);
 
-const addExamForm = reactive({
-  start_time: "",
-  test_id: null
+const addteacherForm = reactive({
+  name: "",
+  teacher_id: null
 })
 
 
@@ -78,7 +65,7 @@ const addExamForm = reactive({
 
 const store = useStore();
 
-const examForm = reactive({
+const teacherForm = reactive({
   list: []
 })
 
@@ -86,20 +73,15 @@ const testIdOption = reactive({
   list: []
 })
 
-const examInfo = reactive({
-  exam_id: -1,
-  test_id:-1,
+const teacherDInfo = reactive({
+  id: -1,
 })
 
 const refreshData = () => {
-  get("/api/examinfo/exam-list", (message)=>{
-    examForm.list = []
-    for (let i in message){
-      message[i].start_time = formattedDate(message[i].start_time)
-    }
-    examForm.list.push(...message);
-    console.log(examForm)
-    router.push("/teacher/index/examList");
+  get("/api/teacher/get-all-teacher-info", (message)=>{
+    teacherForm.list = []
+    teacherForm.list.push(...message);
+    console.log(teacherForm)
   }, (message) => {
     console.log(message);
   })
@@ -119,33 +101,42 @@ onMounted(() => {
   refreshData()
 })
 
+const validateID = (rule, value, callback) => {
+  if (value === '') {
+    callback(new Error('请输入教师编号'))
+  } else if(!/^[a-zA-Z]+$/.test(value)){
+    callback(new Error('教师编号只能由大小写英文组成'))
+  } else {
+    callback()
+  }
+}
+
 
 const clickDelete = (scope) => {
-  examInfo.exam_id = examForm.list[scope].exam_id;
-  examInfo.test_id = examForm.list[scope].test_id;
-  if (examInfo.exam_id === -1 || examInfo.test_id === -1){
-    ElMessage.warning("请选择考试")
+  teacherDInfo.id = teacherForm.list[scope].id;
+  if (teacherDInfo.id === null){
+    ElMessage.warning("请选择教师信息")
   } else {
-    post('/api/examinfo/delete-exam',{
-      exam_id: examInfo.exam_id,
+    post('/api/teacher/delete-teacher-info',{
+      id: teacherDInfo.id,
     },()=>{
-      ElMessage.success("删除考试信息成功");
+      ElMessage.success("删除教师信息成功");
       refreshData();
     },()=>{
-      ElMessage.error("删除考试失败");
+      ElMessage.error("删除教师信息失败");
       refreshData();
     })
   }
 }
 
 const submitAdd = () => {
-  console.log(addExamForm)
-  if (addExamForm.test_id === null || addExamForm.start_time === ""){
-    ElMessage.warning("请填写正确考试信息再添加考试")
+  console.log(addteacherForm)
+  if (addteacherForm.name === null || addteacherForm.teacher_id === ""){
+    ElMessage.warning("请填写正确教师信息再添加")
   }else {
-    post("api/examinfo/add-exam-info",{
-      start_time: addExamForm.start_time,
-      test_id: addExamForm.test_id
+    post("api/teacher/add-teacher-info",{
+      teacher_id: addteacherForm.teacher_id,
+      name: addteacherForm.name
     }, (message)=>{
       ElMessage.success(message)
       refreshData()
@@ -156,7 +147,7 @@ const submitAdd = () => {
   }
 }
 
-const onAddExam = () => {
+const onAddTeacher = () => {
   getOption()
   dialogFormVisible.value = true;
 }

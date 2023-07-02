@@ -28,6 +28,10 @@ const handleSelectApplyInfo = () => {
   console.log(router.currentRoute);
 }
 
+const handleSelectTeacherInfo = () => {
+  router.push('/teacher/index/teacherInfo')
+}
+
 </script>
 
 <template>
@@ -49,10 +53,11 @@ const handleSelectApplyInfo = () => {
     <el-sub-menu index="1">
       <template #title>
         <el-icon><Avatar/></el-icon>
-        <span>学生考试信息</span>
+        <span>用户信息管理</span>
       </template>
       <el-menu-item-group title="CET-6">
         <el-menu-item index="1-1" @click="handleSelectApplyInfo">学生报考信息</el-menu-item>
+        <el-menu-item index="1-2" @click="handleSelectTeacherInfo">教师信息</el-menu-item>
       </el-menu-item-group>
     </el-sub-menu>
     <el-menu-item index="examInfo" @click="handleSelectExamInfo">
