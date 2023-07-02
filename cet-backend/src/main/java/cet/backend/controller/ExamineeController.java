@@ -127,6 +127,7 @@ public class ExamineeController {
     }
 
     public AnswerInfo current_answer;
+    public int current_score=0;
 
     @PostMapping("/auto-grading")
     public RestBean<Boolean> autoGrading(@RequestParam("exam_id") int exam_id,
@@ -165,6 +166,29 @@ public class ExamineeController {
             score+=5;
         }
         if(examineeHandlerService.updateScore(score,exam_id,user_id)>0){
+            current_score = score;
+            return RestBean.success(true);
+        }else{
+            return RestBean.failure(400,false);
+        }
+    }
+
+    @GetMapping ("/set-finish-status")
+    public RestBean<Boolean> setFinishStatus(){
+        current_grading_status="已完成";
+        int res = examineeHandlerService.updateGradingStatus(current_grading_status, current_answer.getExam_id(), current_answer.getUser_id());
+        if (res>0) {
+            return RestBean.success(true);
+        }else{
+            return RestBean.failure(400,false);
+        }
+    }
+
+    @PostMapping("/Teacher-Scoring")
+    public RestBean<Boolean> addTeacherScore(@RequestParam("translationScore") int translationScore,
+                                             @RequestParam("writingScore") int writingScore) {
+        current_score= current_score+translationScore+writingScore;
+        if(examineeHandlerService.updateScore(current_score,current_answer.getExam_id(),current_answer.getUser_id())>0){
             return RestBean.success(true);
         }else{
             return RestBean.failure(400,false);

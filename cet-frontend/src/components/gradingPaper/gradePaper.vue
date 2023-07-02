@@ -57,10 +57,19 @@ const SaveAndSubmit = () => {
   form.translationScore = num_translation.value
   form.writingScore = num_writing.value
   //post
+  post('/api/examinee/Teacher-Scoring',{
+    translationScore: form.translationScore,
+    writingScore: form.writingScore,
+  },()=>{
+    get('api/examinee/set-finish-status',()=>{
+      ElMessage.success("已完成该考生阅卷");
+      goback()
+    },()=>{
+      ElMessage.error("请完成全部阅卷");
+    })
 
-
+  })
   console.log(form)
-  goback()
 }
 
 const goback = () => {

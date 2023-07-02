@@ -62,7 +62,9 @@ const clickGrading = (scope) => {
   answerInfo.grading_status = answerForm.list[scope].grading_status;
   if (answerInfo.exam_id === -1 || answerInfo.user_id === -1){
     ElMessage.warning("请选择答卷")
-  } else {
+  } else if(answerInfo.grading_status === "已完成"){
+    ElMessage.warning("已完成阅卷");
+  } else{
     post('/api/examinee/set-answer-id',{
       exam_id: answerInfo.exam_id,
       user_id: answerInfo.user_id,

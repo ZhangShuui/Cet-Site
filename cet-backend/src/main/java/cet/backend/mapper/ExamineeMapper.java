@@ -49,4 +49,7 @@ public interface ExamineeMapper {
 
     @Update("update soft_apply set score=#{score} where exam_id=#{exam_id} and user_id=#{user_id}")
     int updateScore(int score,int exam_id,int user_id);
+
+    @Update("update soft_answer set grading_status=#{grading_status} where exam_id=#{exam_id} and user_id=#{user_id}")
+    int updateGradingStatus(String grading_status,int exam_id,int user_id);
 }

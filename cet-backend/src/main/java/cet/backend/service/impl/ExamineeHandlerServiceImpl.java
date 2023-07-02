@@ -112,4 +112,9 @@ public class ExamineeHandlerServiceImpl implements ExamineeHandlerService {
     public int updateScore(int score, int exam_id, int user_id) {
         return mapper.updateScore(score,exam_id,user_id);
     }
+
+    @Override
+    public int updateGradingStatus(String grading_status, int exam_id, int user_id) {
+        return mapper.updateGradingStatus(grading_status,exam_id,user_id);
+    }
 }
