@@ -66,4 +66,9 @@ public class ExamInfoController {
     RestBean<Timestamp> getExamStartTime(@RequestParam("exam_id") int exam_id) {
         return RestBean.success(service.getExamStartTime(exam_id));
     }
+
+    @GetMapping("/exam-list")
+    RestBean<List<ExamInfo>> getAllExamInfo(){
+        return RestBean.success(service.getAllExamInfo());
+    }
 }

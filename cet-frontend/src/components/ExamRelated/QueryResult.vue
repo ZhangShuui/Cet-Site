@@ -19,6 +19,10 @@ const query = () => {
   })
 }
 
+const goback = () => {
+  router.push('/index')
+}
+
 </script>
 
 <template>
@@ -32,6 +36,7 @@ const query = () => {
         <el-text>注册在线报名系统账号，查询2005年6月及以后考试成绩，下载2021年6月及以后考试电子成绩报告单（证书）。</el-text>
         <div style="margin-top: 20px">
           <el-button @click="query" style="height: 40px; width: 100px; background-color: darkseagreen; color: white;font-weight: bold;font-size: 16px">确认查询</el-button>
+          <el-button @click="goback" style="height: 40px; width: 100px; background-color: indianred; color: white;font-weight: bold;font-size: 16px">返回首页</el-button>
         </div>
     </el-card>
   </div>

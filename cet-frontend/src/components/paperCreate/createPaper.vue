@@ -285,7 +285,7 @@
   </div>
 
   <div style="margin-top: 0px">
-    <div style="font-size: 25px;font-weight: bold">翻译题</div>
+    <div style="font-size: 25px;font-weight: bold">写作题</div>
   </div>
   <div style="margin-top: 10px">
     <el-form :model="form_paper" :rules="rules" label-width="120px">
