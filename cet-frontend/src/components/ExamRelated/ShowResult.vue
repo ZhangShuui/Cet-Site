@@ -56,7 +56,7 @@ const isShowReal = () => {
 
 <template>
   <div style="font-size: 15px;margin-top: 10px; font-weight: bold">姓名: {{store.auth.user.username}}</div>
-  <div style="font-size: 15px;margin-top: 10px; font-weight: bold">证件号码:{{store.auth.user.id}}</div>
+  <div style="font-size: 15px;margin-top: 10px; font-weight: bold">考生编号: {{store.auth.user.id}}</div>
   <div align=center>
     <el-table :data="examResult.list" border stripe style="width: 1100px;margin-top: 10px">
       <el-table-column  prop="exam_id" label="考试编号" width="180px" />
