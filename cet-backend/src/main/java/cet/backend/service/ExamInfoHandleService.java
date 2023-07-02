@@ -13,4 +13,6 @@ public interface ExamInfoHandleService {
     List<ExamInfo> getExamInfoCanQuit(int user_id);
 
     Timestamp getExamStartTime(int exam_id);
+
+    int deleteExamInfo(int exam_id);
 }

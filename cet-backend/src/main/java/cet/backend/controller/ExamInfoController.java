@@ -71,4 +71,14 @@ public class ExamInfoController {
     RestBean<List<ExamInfo>> getAllExamInfo(){
         return RestBean.success(service.getAllExamInfo());
     }
+
+    @PostMapping("/delete-exam")
+    RestBean<Boolean> deleteExam(@RequestParam("exam_id") int exam_id){
+        int res = service.deleteExamInfo(exam_id);
+        if(res>0){
+            return RestBean.success(true);
+        }else {
+            return RestBean.failure(400,false);
+        }
+    }
 }

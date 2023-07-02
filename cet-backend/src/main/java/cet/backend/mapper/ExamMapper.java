@@ -1,6 +1,7 @@
 package cet.backend.mapper;
 
 import cet.backend.entity.ExamRelated.ExamInfo;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,5 +19,8 @@ public interface ExamMapper {
     List<ExamInfo> getAllExamTaken(int user_id);
     @Select("select start_time from soft_examinfo where exam_id = #{exam_id} ")
     Timestamp getStartTime(int exam_id);
+
+    @Delete("delete from soft_examinfo where exam_id=#{exam_id}")
+    int deleteExamInfo(int exam_id);
 
 }

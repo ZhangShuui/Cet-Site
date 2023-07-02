@@ -57,4 +57,9 @@ public class ExamInfoHandleServiceImpl implements ExamInfoHandleService {
     public Timestamp getExamStartTime(int exam_id) {
         return mapper.getStartTime(exam_id);
     }
+
+    @Override
+    public int deleteExamInfo(int exam_id) {
+        return mapper.deleteExamInfo(exam_id);
+    }
 }
