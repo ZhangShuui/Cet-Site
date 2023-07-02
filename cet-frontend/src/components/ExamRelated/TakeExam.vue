@@ -140,6 +140,8 @@ const min = ref('--');
 const sec = ref('--');
 const start = ref(false);
 
+const centerDialogVisible = ref(false)
+
 const startCountdown = (start_time) => {
   console.log(start_time)
   let minutes = start_time.getMinutes();
@@ -528,15 +530,35 @@ const ShowMyAns = () => {
       </el-card>
     </el-form>
     <div align="center">
-      <el-button style="margin-top: 10px" type="primary" @click="ShowMyAns">保存答案</el-button>
+      <el-button style="margin-top: 10px; background-color: indianred" type="primary" @click="centerDialogVisible = true">
+        退出考试
+      </el-button>
       <el-button style="margin-top: 10px" type="primary" @click="submitAns">提交试卷</el-button>
     </div>
-    </div>
+  </div>
+  <el-dialog
+      v-model="centerDialogVisible"
+      title="温馨提示"
+      width="30%"
+      align-center
+  >
+    <span>确定退出考试吗？你所做的更改不会被保留。</span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="centerDialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="centerDialogVisible = false;router.push('/index')">
+          确定
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 
 <style scoped>
-
+.dialog-footer button:first-child {
+  margin-right: 10px;
+}
 </style>
 
 
