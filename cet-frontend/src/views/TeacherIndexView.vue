@@ -28,7 +28,7 @@
           </el-container>
           <el-divider style="margin-top: 0; stroke-dashoffset: 10px" />
         </el-header>
-        <el-main style="overflow: hidden">
+        <el-main style="overflow: auto">
           <router-view>
           </router-view>
         </el-main>

@@ -24,8 +24,8 @@
     </el-table-column>
   </el-table>
   <el-divider style="visibility: hidden"/>
-  <div align="center">
-    <el-row gutter="50">
+  <div>
+    <el-row gutter="20">
       <el-col span="12">
         <el-card>
           <template #header><span>查询考试信息</span></template>

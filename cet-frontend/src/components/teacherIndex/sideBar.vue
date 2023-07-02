@@ -28,7 +28,7 @@ const handleSelectApplyInfo = () => {
 <template>
   <el-container direction="horizontal" style="height: 40px; background-color: #475669">
     <img src="../../figs/cetlogo.png"
-         style="width: 20px; height: 20px; margin-left: 2px;margin-top: 15px;margin-right: 10px" alt="sss"/>
+         style="width: 20px; height: 20px; margin: 11px" alt="sss"/>
     <el-text style="color: white">
       教师管理系统
     </el-text>
