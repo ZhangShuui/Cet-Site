@@ -7,13 +7,21 @@
       <el-container style="height: auto; background-color: white">
         <el-header height="45px" style="background-color: #606266; margin-left: 0px;padding: 0" >
           <el-container direction="horizontal" style="height:44px ;background-color: white; margin-left: 0px">
-              <el-breadcrumb separator="/" class="header-breadcrumb">
-                <el-breadcrumb-item>teacher</el-breadcrumb-item>
-                <el-breadcrumb-item>
-                  <a href="/teacher/index">
-                    index
-                  </a>
-                </el-breadcrumb-item>
+              <el-breadcrumb
+                  separator="/"
+                  class="header-breadcrumb">
+                <el-breadcrumb-item
+                    v-for="item in router.currentRoute.value.fullPath.split('/').slice(1, router.currentRoute.value.fullPath.split('/').length)"
+
+                >{{item}}</el-breadcrumb-item>
+
+                <!--                <el-breadcrumb-item>teacher</el-breadcrumb-item>-->
+<!--                <el-breadcrumb-item>-->
+<!--                  <a href= router.currentRoute.href>-->
+<!--                    index-->
+<!--                  </a>-->
+
+<!--                </el-breadcrumb-item>-->
               </el-breadcrumb>
               <el-menu style="margin-left: auto;--el-menu-item-height: 44px">
                 <el-sub-menu style="background-color: #d3dce6;height:44px; ">

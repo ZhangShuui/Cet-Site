@@ -359,15 +359,35 @@ const onSubmit = () => {
                       },()=>{
                         ElMessage.success("创建试卷成功");
                         router.push('/teacher/index/paperList');
+                      },()=>{
+                        ElMessage.error("创建试卷失败");
                       })
+                    },()=> {
+                      ElMessage.error("请填写完整的试卷信息")
                     })
+                  },()=> {
+                    ElMessage.error("请填写完整的试卷信息")
                   })
+                },()=> {
+                  ElMessage.error("请填写完整的试卷信息")
                 })
+              },()=> {
+                ElMessage.error("请填写完整的试卷信息")
               })
+            },()=> {
+              ElMessage.error("请填写完整的试卷信息")
             })
+          },()=> {
+            ElMessage.error("请填写完整的试卷信息")
           })
+        },()=> {
+          ElMessage.error("请填写完整的试卷信息")
         })
+      },()=> {
+        ElMessage.error("请填写完整的试卷信息")
       })
+    },()=> {
+      ElMessage.error("请填写完整的试卷信息")
     })
   },()=> {
     ElMessage.error("请填写完整的试卷信息")

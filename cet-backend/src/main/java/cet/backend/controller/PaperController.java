@@ -62,6 +62,9 @@ public class PaperController {
                                            @RequestParam("OptionC") String OptionC,
                                            @RequestParam("OptionD") String OptionD){
 
+        if(Topic.equals("")||OptionA.equals("")||OptionB.equals("")||OptionC.equals("")||OptionD.equals("")){
+            return RestBean.failure(400,false);
+        }
         choiceQuestion choiceQ = new choiceQuestion(Topic,OptionA,OptionB,OptionC,OptionD);
         String combineC = choiceQ.combineChoice();
         int choiceNum = paperHandleServiceimpl.addChoice(combineC);
