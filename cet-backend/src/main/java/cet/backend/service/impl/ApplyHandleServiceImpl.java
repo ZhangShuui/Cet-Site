@@ -27,10 +27,13 @@ public class ApplyHandleServiceImpl implements ApplyHandleService {
     @Override
     public boolean applyTestByUser(int exam_id, int user_id) {
         String time = LocalDateTime.now().toString();
-        if (mapper.findByExamAndUserId(exam_id,user_id) == null)
+
+        if (mapper.findByExamAndUserId(exam_id, user_id).size() == 0)
             return mapper.addApplyInfo(exam_id, user_id, "未支付", time, -1, -1) > 0;
-        else
+        else{
             return false;
+        }
+
     }
 
     @Override
